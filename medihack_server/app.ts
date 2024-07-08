@@ -1,5 +1,7 @@
 import express from 'express';
+import 'dotenv/config'
 import bodyParser from 'body-parser';
+import mongoose from 'mongoose';
 
 export class App {
   private app: express.Application = express();
@@ -11,6 +13,7 @@ export class App {
 
   public async init() {
     this.setupMiddleware();
+    this.setupMongoConnection();
     this.registerTestController();
     this.register404Page();
     this.startServer();
@@ -19,6 +22,14 @@ export class App {
   private setupMiddleware() {
     this.app.use(bodyParser.urlencoded({ extended: true }));
     this.app.use(bodyParser.json());
+  }
+
+  private setupMongoConnection() {
+    const mongoDBUriKey: string = process.env.MONGO_ATLAS_URI || "";
+    mongoose.connect(mongoDBUriKey);
+    const db = mongoose.connection;
+    db.on('error', console.error.bind(console, 'MongoDB connection error'));
+    db.once("open", () => console.log("Connected to DB!"));
   }
 
   private registerTestController() {

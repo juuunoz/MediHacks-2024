@@ -106,7 +106,9 @@ describe('User Class Update Methods', () => {
 
   it('points deleted should throw an error', () => {
     const pointsUsed = 50;
+    user.addPoints(40)
     expect(() => {user.deletePoints(pointsUsed);}).toThrow("Insufficient points. The total number of points cannot go below 0.");
+    expect(user.getPoints()).toBe(40); // make sure points havent been changed
   });
 });
 

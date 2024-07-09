@@ -123,15 +123,10 @@ export class User {
 
     // Method to delete points (ie, if user uses points)
     deletePoints(points: number): void {
-      try {
         if (this.points - points < 0) {
           throw new Error("Insufficient points. The total number of points cannot go below 0.");
         }
         this.points -= points;
-      } catch (error) {
-        if (error instanceof Error) {console.error(error.message);}
-        else {console.error("An unknown error occurred.");}
-      }
     }
   }
   

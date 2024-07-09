@@ -1,7 +1,4 @@
-export interface CaseStudy {
-  id: number;
-  title: string;
-}
+import { CaseStudy } from "../models/caseStudiesModel";
 
 export class CaseStudiesService {
   private caseStudies: CaseStudy[] = [];

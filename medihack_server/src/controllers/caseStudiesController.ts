@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
-import { CaseStudiesService, CaseStudy } from '../services/caseStudiesService';
+import { CaseStudiesService } from '../services/caseStudiesService';
+import { CaseStudy } from "../models/caseStudiesModel";
 
 export class CaseStudiesController {
   private caseStudiesService: CaseStudiesService;

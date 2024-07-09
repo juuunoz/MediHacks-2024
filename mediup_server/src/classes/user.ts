@@ -5,8 +5,8 @@ export class User {
     firstName: string;
     lastName: string;
     email: string;
-    occupation: string;
-    institution: string;
+    occupation: string; // Student or occupation (or empty string)
+    institution: string; // hospital/workplace or school (or empty string)
     specialization: Specialization; // category chosen by user when account is first created
     coursesCompleted: number; // number of courses completed
     verified: boolean; // whether or not the user can create quizzes

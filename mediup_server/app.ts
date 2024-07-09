@@ -3,6 +3,14 @@ import 'dotenv/config'
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import caseStudiesRoute from './src/routes/caseStudiesRoute';
+import authRoute from './src/routes/authRoute';
+import { AuthUserResponse } from './src/models/authModel';
+const AuthUserSchema = require("./src/schema/authUserSchema");
+const bcrypt = require("bcryptjs");
+const passport = require('passport');
+const localStrategy = require('passport-local').Strategy;
+const JWTstrategy = require('passport-jwt').Strategy;
+const ExtractJWT = require('passport-jwt').ExtractJwt;
 
 export class App {
   private app: express.Application = express();
@@ -15,6 +23,7 @@ export class App {
   public async init() {
     this.setupMiddleware();
     this.setupMongoConnection();
+    this.setupPassportAuth();
     this.registerRoutes();
     this.registerTestController();
     this.register404Page();
@@ -34,8 +43,54 @@ export class App {
     db.once("open", () => console.log("Connected to DB!"));
   }
 
+  private setupPassportAuth() {
+    passport.use(
+      'login',
+      new localStrategy(
+        {
+          usernameField: 'email',
+          passwordField: 'password'
+        },
+        async (email: any, password: any, done: any) => {
+          try {
+            const user: AuthUserResponse = await AuthUserSchema.findOne({ userEmail: email });
+            if (!user) {
+              return done(null, false, { message: "Incorrect username" });
+            };
+            
+            bcrypt.compare(password, user.userPassword, (err: any, res: any) => {
+              if (res) {
+                return done(null, user, { message: 'Logged in Successfully' });
+              } else {
+                return done(null, false, { message: "Incorrect password"});
+              }
+            })
+          } catch (error) {
+            return done(error);
+          }
+        }
+      )
+    );
+    passport.use(
+      new JWTstrategy(
+        {
+          secretOrKey: process.env.JWT_SECRET,
+          jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken()
+        },
+        async (token: any, done: any) => {
+          try {
+            return done(null, token.user);
+          } catch (error) {
+            done(error);
+          }
+        }
+      )
+    );
+  }
+
   private registerRoutes() {
-    this.app.use('/api/casestudies', caseStudiesRoute)
+    this.app.use('/api/casestudies', caseStudiesRoute);
+    this.app.use('/api/auth', authRoute)
   }
 
   private registerTestController() {

@@ -2,6 +2,7 @@ import express from 'express';
 import 'dotenv/config'
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
+import caseStudiesRoute from './src/routes/caseStudiesRoute';
 
 export class App {
   private app: express.Application = express();
@@ -14,6 +15,7 @@ export class App {
   public async init() {
     this.setupMiddleware();
     this.setupMongoConnection();
+    this.registerRoutes();
     this.registerTestController();
     this.register404Page();
     this.startServer();
@@ -30,6 +32,10 @@ export class App {
     const db = mongoose.connection;
     db.on('error', console.error.bind(console, 'MongoDB connection error'));
     db.once("open", () => console.log("Connected to DB!"));
+  }
+
+  private registerRoutes() {
+    this.app.use('/api/casestudies', caseStudiesRoute)
   }
 
   private registerTestController() {

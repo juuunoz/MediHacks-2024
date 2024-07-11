@@ -2,6 +2,9 @@ import { UUID } from 'crypto';
 import { Specialization } from './specialization';
 import { v4 as uuidv4 } from 'uuid';
 
+/**
+ * represents a user on the site
+ */
 export class User {
     // Define user properties with types
     private firstName: string;
@@ -16,6 +19,18 @@ export class User {
     private userID: string; //2^122 possible unique ID's
   
     // ******************************* CONSTRUCTOR **************************************
+      /**
+     * Creates an instance of User.
+     * @param {string} firstName - The first name of the user.
+     * @param {string} lastName - The last name of the user.
+     * @param {string} email - The email address of the user.
+     * @param {string} occupation - The occupation of the user.
+     * @param {string} institution - The institution the user is affiliated with.
+     * @param {string} specialization - The specialization of the user.
+     * @param {number} coursesCompleted - The number of courses completed (default = 0)
+     * @param {boolean} verified - if the user is verified to make quizzes (default = false)
+     * @param {number} points - accumulated points by user (default = 0)
+     */
     constructor(
         firstName: string,
         lastName: string,

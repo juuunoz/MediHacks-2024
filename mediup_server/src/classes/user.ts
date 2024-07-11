@@ -1,4 +1,6 @@
+import { UUID } from 'crypto';
 import { Specialization } from './specialization';
+import { v4 as uuidv4 } from 'uuid';
 
 export class User {
     // Define user properties with types
@@ -11,6 +13,7 @@ export class User {
     private coursesCompleted: number; // number of courses completed
     private verified: boolean; // whether or not the user can create quizzes
     private points: number; // max of 1.7976931348623157×10^308 -> points accumulated by user
+    private userID: string; //2^122 possible unique ID's
   
     // ******************************* CONSTRUCTOR **************************************
     constructor(
@@ -22,7 +25,7 @@ export class User {
         specialization: Specialization,
         coursesCompleted: number = 0,
         verified: boolean = false,
-        points: number = 0
+        points: number = 0,
       ) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -33,6 +36,7 @@ export class User {
         this.coursesCompleted = coursesCompleted;
         this.verified = verified;
         this.points = points;
+        this.userID = uuidv4(); // user v4 which generates random UUID
       }
     
     // *************************** ALL GET FUNCTIONS *********************************
@@ -70,6 +74,10 @@ export class User {
   
     public getPoints(): number {
       return this.points;
+    }
+
+    public getUserID(): string {
+      return this.userID;
     }
 
     // Method to display full name

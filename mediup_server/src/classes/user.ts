@@ -2,15 +2,15 @@ import { Specialization } from './specialization';
 
 export class User {
     // Define user properties with types
-    firstName: string;
-    lastName: string;
-    email: string;
-    occupation: string; // Student or occupation (or empty string)
-    institution: string; // hospital/workplace or school (or empty string)
-    specialization: Specialization; // category chosen by user when account is first created
-    coursesCompleted: number; // number of courses completed
-    verified: boolean; // whether or not the user can create quizzes
-    points: number; // max of 1.7976931348623157×10^308 -> points accumulated by user
+    private firstName: string;
+    private lastName: string;
+    private email: string;
+    private occupation: string; // Student or occupation (or empty string)
+    private institution: string; // hospital/workplace or school (or empty string)
+    private specialization: Specialization; // category chosen by user when account is first created
+    private coursesCompleted: number; // number of courses completed
+    private verified: boolean; // whether or not the user can create quizzes
+    private points: number; // max of 1.7976931348623157×10^308 -> points accumulated by user
   
     // ******************************* CONSTRUCTOR **************************************
     constructor(
@@ -36,93 +36,93 @@ export class User {
       }
     
     // *************************** ALL GET FUNCTIONS *********************************
-    getFirstName(): string {
+    public getFirstName(): string {
       return this.firstName;
     }
   
-    getLastName(): string {
+    public getLastName(): string {
       return this.lastName;
     }
   
-    getEmail(): string {
+    public getEmail(): string {
       return this.email;
     }
   
-    getOccupation(): string {
+    public getOccupation(): string {
       return this.occupation;
     }
   
-    getInstitution(): string {
+    public getInstitution(): string {
       return this.institution;
     }
   
-    getSpecialization(): string {
+    public getSpecialization(): string {
       return this.specialization;
     }
   
-    getCoursesCompleted(): number {
+    public getCoursesCompleted(): number {
       return this.coursesCompleted;
     }
   
-    isVerified(): boolean {
+    public isVerified(): boolean {
       return this.verified;
     }
   
-    getPoints(): number {
+    public getPoints(): number {
       return this.points;
     }
 
     // Method to display full name
-    getFullName(): string {
+    public getFullName(): string {
       return `${this.firstName} ${this.lastName}`;
     }
 
     // Method to display user info
-    getUserInfo(): string {
+    public getUserInfo(): string {
       return `Name: ${this.getFullName()}, Email: ${this.email}, Occupation: ${this.occupation}, Institution: ${this.institution}, Specialization: ${this.specialization}, Courses Completed: ${this.coursesCompleted}, Verified: ${this.verified}, Points: ${this.points}`;
     }
 
 // ****************************** ADD, DELETE, UPDATE FUNCTIONS **************************
 
-    updateFirstName(newFirstName: string): void {
+    public updateFirstName(newFirstName: string): void {
       this.firstName = newFirstName;
     }
 
-    updateLastName(newLastName: string): void {
+    public updateLastName(newLastName: string): void {
       this.lastName = newLastName;
     }
 
-    updateEmail(newEmail: string): void {
+    public updateEmail(newEmail: string): void {
       this.email = newEmail;
     }
 
-    updateOccupation(newOccupation: string): void {
+    public updateOccupation(newOccupation: string): void {
       this.occupation = newOccupation;
     }
 
-    updateInstitution(newInstitution: string): void {
+    public updateInstitution(newInstitution: string): void {
       this.institution = newInstitution;
     }
 
-    updateSpecialization(newSpecialization: Specialization): void {
+    public updateSpecialization(newSpecialization: Specialization): void {
       this.specialization = newSpecialization;
     }
 
-    updateCoursesCompleted(newCoursesCompleted: number): void {
+    public updateCoursesCompleted(newCoursesCompleted: number): void {
       this.coursesCompleted = newCoursesCompleted;
     }
 
-    updateVerification(newStatus: boolean): void {
+    public updateVerification(newStatus: boolean): void {
       this.verified = newStatus;
     }
 
     // Method to add points
-    addPoints(points: number): void {
+    public addPoints(points: number): void {
       this.points += points;
     }
 
     // Method to delete points (ie, if user uses points)
-    deletePoints(points: number): void {
+    public deletePoints(points: number): void {
         if (this.points - points < 0) {
           throw new Error("Insufficient points. The total number of points cannot go below 0.");
         }

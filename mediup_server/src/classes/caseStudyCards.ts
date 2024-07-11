@@ -2,17 +2,17 @@ import { Specialization } from './specialization';
 const CaseStudyCardSchema = require("../schema/caseStudyCardSchema");
 
 export class CaseStudyCards {
-  private title: string;
-  private caseStudyID: string;
-  private creatorID: string;
-  private likes: number;
-  private specialization: Specialization;
-  private shortDescription: string;
-  private image: string;
-  private creationDate: Date;
+  protected title: string;
+  protected caseStudyID: string;
+  protected creatorID: string;
+  protected likes: number;
+  protected specialization: Specialization;
+  protected shortDescription: string;
+  protected image: string;
+  protected creationDate: Date;
 
-  private caseStudyCannotBeFound = 'Case study not found';
-  private caseStudyError = 'An error occured while updating the case study';
+  protected caseStudyCannotBeFound = 'Case study not found';
+  protected caseStudyError = 'An error occured while updating the case study';
 
   constructor(
     title: string,

@@ -28,6 +28,7 @@ export interface MultipleChoiceQuestion extends Question {
 /**
  * Interface for short answer type questions
  */
+// we want to implement AI into short answer questions to check if user answer is close
 export interface ShortAnswerQuestion extends Question {
   correctAnswer: string;
 }

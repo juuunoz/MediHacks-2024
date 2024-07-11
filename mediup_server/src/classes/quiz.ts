@@ -60,6 +60,26 @@ export class Quiz extends CaseStudyCards{
     public getCurrentQuestion(): Question.Question{
         return this.questions[this.questionIndex];
     }
+    /** function to get the current (single) content */
+    public getCurrentContent(): Content.Content{
+        return this.contents[this.contentIndex];
+    }
+
+    /** function to get the nth content in the array
+     * @param {number} n - the 0 indexed content returned
+     */
+    public getNthContent(n: number): Content.Content{
+        // if the nth question exists
+        if (n >= this.contents.length) {
+            throw new Error('N value cannot exceed index limit for content list')
+        }
+        else if (n < 0){
+            throw new Error('N cannot be a negative value')
+        }
+        // otherwise throw an error
+        return this.contents[n];
+    }
+
     /** return the nth question in the array 
      * @param {number} n - the 0 indexed question returned
     */
@@ -158,5 +178,14 @@ export class Quiz extends CaseStudyCards{
         if (a1.length !== a2.length) return false;
         // takes every (left, right) in a1 and makes sure every value is mapped in a2
         return a1.every((left, right) => left === a2[right]);
+      }
+
+// ************************ QUIZ TRAVERSAL AND OTHER FUNCTIONALITY **********************
+      public nextQuestion(): void{
+
+
+
+
+        
       }
 }

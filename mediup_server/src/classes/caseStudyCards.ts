@@ -58,6 +58,10 @@ export class CaseStudyCards {
     return this.shortDescription;
   }
 
+  public getCreationDate(): Date {
+    return this.creationDate;
+  }
+
   public getImage(): string {
     return this.image;
   }

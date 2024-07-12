@@ -1,21 +1,20 @@
 import mongoose, { Schema, Document } from 'mongoose';
 import {cardQuizBase} from './cardQuizBase';
+import * as Question from '../classes/question';
+import * as Content from '../classes/content';
+import { Specialization } from '../classes/specialization';
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {authUserSchema} from './authUserSchema'; // leave this here
-import { Specialization } from '../classes/specialization';
 /* eslint-enable @typescript-eslint/no-unused-vars */
 
-interface caseStudyCard extends cardQuizBase {
-  image: string;
+interface quizData extends cardQuizBase {
+  questions: Question.Question[]
+  contents: Content.Content[]
 }
 
-const caseStudyCardSchema: Schema = new Schema({
+const quizSchema: Schema = new Schema({
   title:{
-    type: String,
-    required: true
-  },
-  caseStudyID: {
     type: String,
     required: true
   },
@@ -40,12 +39,20 @@ const caseStudyCardSchema: Schema = new Schema({
     type: Date,
     required: true
   },
-  image: {
+  caseStudyID: {
     type: String,
     required: true
-  }
+  },
+  // questions: {
+  //   type: Question.Question[],
+  //   required: true
+  // },
+  // contents: {
+  //   type: Content.Content[],
+  //   required: true
+  // }
 })
 
-const caseStudyCard = mongoose.model<caseStudyCard & Document>('caseStudyCard', caseStudyCardSchema);
+const quizData = mongoose.model<quizData & Document>('quizData', quizSchema);
 
-export default caseStudyCard;
+export default quizData;

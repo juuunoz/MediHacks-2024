@@ -4,16 +4,16 @@ import { v4 as uuidv4 } from 'uuid';
 
 export class CaseStudyCards {
   protected title: string;
-  protected caseStudyID: string;
   protected creatorID: string;
   protected likes: number;
   protected specialization: Specialization;
   protected shortDescription: string;
-  protected image: string;
   protected creationDate: Date;
+  protected caseStudyID: string;
+  protected image: string;
 
-  protected caseStudyCannotBeFound = 'Case study not found';
-  protected caseStudyError = 'An error occured while updating the case study';
+  private caseStudyCannotBeFound = 'Case study not found';
+  private caseStudyError = 'An error occured while updating the case study';
 
   constructor(
     title: string,
@@ -21,7 +21,7 @@ export class CaseStudyCards {
     likes: number,
     specialization: Specialization,
     shortDescription: string, 
-    image: string,
+    image: string = ''
   ) {
     this.title = title;
     this.creatorID = creatorID;
@@ -29,7 +29,7 @@ export class CaseStudyCards {
     this.specialization = specialization;
     this.shortDescription = shortDescription;
     this.image = image;
-    this.creationDate = new Date()
+    this.creationDate = new Date();
     this.caseStudyID = uuidv4();
   }
 
@@ -38,7 +38,7 @@ export class CaseStudyCards {
     return this.title;
   }
 
-  public getCaseStudyID(): string {
+  protected getCaseStudyID(): string {
     return this.caseStudyID;
   }
 
@@ -56,6 +56,10 @@ export class CaseStudyCards {
 
   public getShortDescription(): string {
     return this.shortDescription;
+  }
+
+  protected getCreationDate(): Date {
+    return this.creationDate;
   }
 
   public getImage(): string {

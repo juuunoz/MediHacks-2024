@@ -158,14 +158,8 @@ export class Quiz extends CaseStudyCards{
 
       // HAVE TO CHANGE THIS FUNCTION STILL
       private answerPairs(answer: string[]): boolean {
-        const currentQuestion = this.getCurrentQuestion() as Question.MatchingPairsQuestion;
-        const correctPairs = currentQuestion.pairs.map(pair => `${pair.left}-${pair.right}`);
-        const userPairs = answer.map(pair => pair.toLowerCase().trim());
-        
-        if (this.equalArray(correctPairs, userPairs)) {
-          return true;
-        }
-        return false;
+        // implement later
+        return false
       }
 
       /**
@@ -181,11 +175,42 @@ export class Quiz extends CaseStudyCards{
       }
 
 // ************************ QUIZ TRAVERSAL AND OTHER FUNCTIONALITY **********************
-      public nextQuestion(): void{
+      /** iterate question index by 1 */
+      public nextQuestionIndex(): void{
+        if (this.questionIndex < this.questions.length - 1){
+            this.questionIndex++;
+        }
+      }
 
+      /** iterate content index by 1 */
+      public nextContentIndex(): void{
+        if (this.contentIndex < this.contents.length - 1){
+            this.contentIndex++;
+        }        
+      }
 
+      /** deiterates question index by 1 */
+      public previousQuestionIndex(): void{
+        if (this.questionIndex > 0){
+            this.questionIndex--;
+        }
+      }
 
+      /** deiterates content index by 1 */
+      public previousContentIndex(): void{
+        if (this.contentIndex > 0){
+            this.contentIndex--;
+        }
+      }
 
-        
+      /** reset both indexes */
+      public resetQuiz(): void{
+        this.contentIndex = 0;
+        this.questionIndex = 0;
+      }
+
+      /** checks if the quiz is finished. content and quiz index should both be at max */
+      public slidesFinished(): boolean{
+        return (this.questionIndex === this.questions.length - 1 && this.contentIndex === this.contents.length - 1);
       }
 }

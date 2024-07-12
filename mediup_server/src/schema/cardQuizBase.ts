@@ -5,7 +5,7 @@ export interface cardQuizBase {
     title: string;
     creatorID: mongoose.Schema.Types.ObjectId;
     likes: number;
-    specialization: Specialization;
+    specialization: String; // not sure if this should be of type Specialization
     shortDescription: string;
     creationDate: Date;
     caseStudyID: string;

@@ -2,6 +2,7 @@ import mongoose, { Schema, Document } from 'mongoose';
 import {cardQuizBase} from './cardQuizBase';
 import * as Question from '../classes/question';
 import * as Content from '../classes/content';
+import { Specialization } from '../classes/specialization';
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {authUserSchema} from './authUserSchema'; // leave this here
@@ -27,7 +28,7 @@ const quizSchema: Schema = new Schema({
     required: true
   },
   specialization: {
-    type: String,
+    type: String, // Using String type for enum handling
     required: true
   },
   shortDescription: {

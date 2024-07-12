@@ -2,7 +2,7 @@
 // import { useNavigate } from 'react-router-dom';
 // import AuthContext from '../../Store/AuthContext';
 import { useState } from 'react';
-import TempHeader from './components/tempHeader';
+import TempHeader from './components/navBar';
 import SelectQuestionType from './components/SelectQuestionType';
 import { ListOfQuestionTypes } from '../../models/Questions';
 import CaseStudiesPage from './components/CaseStudiesPage';

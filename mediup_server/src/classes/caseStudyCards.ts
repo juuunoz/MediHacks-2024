@@ -1,5 +1,6 @@
 import { Specialization } from './specialization';
 const CaseStudyCardSchema = require("../schema/caseStudyCardSchema");
+import { v4 as uuidv4 } from 'uuid';
 
 export class CaseStudyCards {
   protected title: string;
@@ -16,7 +17,6 @@ export class CaseStudyCards {
 
   constructor(
     title: string,
-    caseStudyID: string, 
     creatorID: string,
     likes: number,
     specialization: Specialization,
@@ -24,13 +24,13 @@ export class CaseStudyCards {
     image: string,
   ) {
     this.title = title;
-    this.caseStudyID = caseStudyID;
     this.creatorID = creatorID;
     this.likes = likes;
     this.specialization = specialization;
     this.shortDescription = shortDescription;
     this.image = image;
     this.creationDate = new Date()
+    this.caseStudyID = uuidv4();
   }
 
 // ******************************************** GET FUNCTIONS **********************************************

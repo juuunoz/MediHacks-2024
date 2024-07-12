@@ -11,6 +11,7 @@ export class Quiz extends CaseStudyCards{
     private contents: Content.Content[];
     private contentIndex: number;
     private identicalCaseStudyID: string;
+    private identicalCreationDate: Date;
     
     /**
    * Creates an instance of Quiz.
@@ -39,6 +40,7 @@ export class Quiz extends CaseStudyCards{
         this.questionIndex = 0;
         this.contents = contents;
         this.contentIndex = 0;
+        this.identicalCreationDate = super.getCreationDate();
 
     }
     // ************************ REGULAR GET FUNCTIONS *************************
@@ -58,8 +60,12 @@ export class Quiz extends CaseStudyCards{
         return this.contentIndex;
     }
 
-    public getIdenticalCaseStudyID(): string{
+    public getCaseStudyID(): string{
       return this.identicalCaseStudyID;
+    }
+
+    public getCreationDate(): Date{
+      return this.creationDate;
     }
     
     /** function to get the current (single) question */

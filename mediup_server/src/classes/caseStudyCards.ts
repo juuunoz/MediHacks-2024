@@ -38,7 +38,7 @@ export class CaseStudyCards {
     return this.title;
   }
 
-  public getCaseStudyID(): string {
+  protected getCaseStudyID(): string {
     return this.caseStudyID;
   }
 
@@ -58,7 +58,7 @@ export class CaseStudyCards {
     return this.shortDescription;
   }
 
-  public getCreationDate(): Date {
+  protected getCreationDate(): Date {
     return this.creationDate;
   }
 

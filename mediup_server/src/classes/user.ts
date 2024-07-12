@@ -15,6 +15,8 @@ export class User {
     private coursesCompleted: number; // number of courses completed
     private verified: boolean; // whether or not the user can create quizzes
     private points: number; // max of 1.7976931348623157×10^308 -> points accumulated by user
+    private password: string;
+    private joinDate: Date;
     private userID: string; //2^122 possible unique ID's
   
     // ******************************* CONSTRUCTOR **************************************
@@ -26,6 +28,7 @@ export class User {
      * @param {string} occupation - The occupation of the user.
      * @param {string} institution - The institution the user is affiliated with.
      * @param {string} specialization - The specialization of the user.
+     * @param {string} password
      * @param {number} coursesCompleted - The number of courses completed (default = 0)
      * @param {boolean} verified - if the user is verified to make quizzes (default = false)
      * @param {number} points - accumulated points by user (default = 0)
@@ -37,9 +40,10 @@ export class User {
         occupation: string,
         institution: string,
         specialization: Specialization,
+        password: string,
         coursesCompleted: number = 0,
         verified: boolean = false,
-        points: number = 0,
+        points: number = 0
       ) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -47,10 +51,12 @@ export class User {
         this.occupation = occupation;
         this.institution = institution;
         this.specialization = specialization;
+        this.password = password;
         this.coursesCompleted = coursesCompleted;
         this.verified = verified;
         this.points = points;
         this.userID = uuidv4(); // user v4 which generates random UUID
+        this.joinDate = new Date();
       }
     
     // *************************** ALL GET FUNCTIONS *********************************
@@ -92,6 +98,14 @@ export class User {
 
     public getUserID(): string {
       return this.userID;
+    }
+
+    public getPassword(): string{
+      return this.password;
+    }
+
+    public getJoinDate(): Date{
+      return this.joinDate;
     }
 
     // Method to display full name
@@ -136,6 +150,10 @@ export class User {
 
     public updateVerification(newStatus: boolean): void {
       this.verified = newStatus;
+    }
+
+    public changePassword(newPassword: string): void{
+      this.password = newPassword;
     }
 
     // Method to add points

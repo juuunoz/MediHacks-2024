@@ -42,14 +42,14 @@ const quizSchema: Schema = new Schema({
     type: String,
     required: true
   },
-  questions: {
-    type: Question.Question[],
-    required: true
-  },
-  contents: {
-    type: Content.Content[],
-    required: true
-  }
+  // questions: {
+  //   type: Question.Question[],
+  //   required: true
+  // },
+  // contents: {
+  //   type: Content.Content[],
+  //   required: true
+  // }
 })
 
 const quizData = mongoose.model<quizData & Document>('quizData', quizSchema);

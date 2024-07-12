@@ -29,7 +29,8 @@ const caseStudyCardSchema: Schema = new Schema({
     required: true
   },
   specialization: {
-    type: Specialization,
+    type: String, // Using String type for enum handling
+    enum: Object.values(Specialization).map(value => value.toString()), // Enum values converted to strings
     required: true
   },
   shortDescription: {
@@ -45,6 +46,21 @@ const caseStudyCardSchema: Schema = new Schema({
     required: true
   }
 })
+
+// CONVERTING ENUM TO STRING BECAUSE MONGOOSE DOESNT SUPPORT TYPE ENUM
+caseStudyCardSchema.set('toJSON', {
+  transform: function(doc, ret) {
+    ret.specialization = ret.specialization.toString(); // Convert enum value to string
+    return ret;
+  }
+});
+
+caseStudyCardSchema.set('toObject', {
+  transform: function(doc, ret) {
+    ret.specialization = ret.specialization.toString(); // Convert enum value to string
+    return ret;
+  }
+});
 
 const caseStudyCard = mongoose.model<caseStudyCard & Document>('caseStudyCard', caseStudyCardSchema);
 

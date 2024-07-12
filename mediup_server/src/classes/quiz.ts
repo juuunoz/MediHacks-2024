@@ -33,7 +33,7 @@ export class Quiz extends CaseStudyCards{
         contents: Content.Content[]
     ){
         // empty string for image
-        super(title, caseStudyID, creatorID, likes, specialization, shortDescription, "");
+        super(title, creatorID, likes, specialization, shortDescription, "");
         this.questions = questions;
         this.questionIndex = 0;
         this.contents = contents;

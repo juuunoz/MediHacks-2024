@@ -10,11 +10,11 @@ export class Quiz extends CaseStudyCards{
     private questionIndex: number; // keep track of which question/number with index
     private contents: Content.Content[];
     private contentIndex: number;
+    private identicalCaseStudyID: string;
     
     /**
    * Creates an instance of Quiz.
    * @param {string} title - The title of the quiz.
-   * @param {string} caseStudyID - The ID of the case study associated with the quiz.
    * @param {string} creatorID - The ID of the creator of the quiz.
    * @param {number} likes - The number of likes or popularity score of the quiz.
    * @param {Specialization} specialization - The specialization or category of the quiz.
@@ -24,7 +24,6 @@ export class Quiz extends CaseStudyCards{
    */
     constructor(
         title: string,
-        caseStudyID: string, 
         creatorID: string,
         likes: number,
         specialization: Specialization,
@@ -34,6 +33,8 @@ export class Quiz extends CaseStudyCards{
     ){
         // empty string for image
         super(title, creatorID, likes, specialization, shortDescription, "");
+        // syncronize caseStudyID with caseStudyCard class
+        this.identicalCaseStudyID = super.getCaseStudyID();
         this.questions = questions;
         this.questionIndex = 0;
         this.contents = contents;
@@ -56,6 +57,11 @@ export class Quiz extends CaseStudyCards{
     public getContentIndex(): number{
         return this.contentIndex;
     }
+
+    public getIdenticalCaseStudyID(): string{
+      return this.identicalCaseStudyID;
+    }
+    
     /** function to get the current (single) question */
     public getCurrentQuestion(): Question.Question{
         return this.questions[this.questionIndex];

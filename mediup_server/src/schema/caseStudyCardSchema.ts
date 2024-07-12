@@ -3,6 +3,7 @@ import {cardQuizBase} from './cardQuizBase';
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {authUserSchema} from './authUserSchema'; // leave this here
+import { Specialization } from '../classes/specialization';
 /* eslint-enable @typescript-eslint/no-unused-vars */
 
 interface caseStudyCard extends cardQuizBase {
@@ -28,7 +29,7 @@ const caseStudyCardSchema: Schema = new Schema({
     required: true
   },
   specialization: {
-    type: String,
+    type: Specialization,
     required: true
   },
   shortDescription: {

@@ -2,35 +2,64 @@ import { Specialization } from './specialization';
 const CaseStudyCardSchema = require("../schema/caseStudyCardSchema");
 
 export class CaseStudyCards {
-  private caseStudyID: string;
-  private creatorID: string;
-  private likes: number;
-  private specialization: Specialization;
-  private shortDescription: string;
-  private longDescription: string;
-  private image: string;
-  private creationDate: Date;
+  protected title: string;
+  protected caseStudyID: string;
+  protected creatorID: string;
+  protected likes: number;
+  protected specialization: Specialization;
+  protected shortDescription: string;
+  protected image: string;
+  protected creationDate: Date;
 
-  private caseStudyCannotBeFound = 'Case study not found';
-  private caseStudyError = 'An error occured while updating the case study';
+  protected caseStudyCannotBeFound = 'Case study not found';
+  protected caseStudyError = 'An error occured while updating the case study';
 
   constructor(
+    title: string,
     caseStudyID: string, 
     creatorID: string,
     likes: number,
     specialization: Specialization,
     shortDescription: string, 
-    longDescription: string, 
     image: string,
   ) {
+    this.title = title;
     this.caseStudyID = caseStudyID;
     this.creatorID = creatorID;
     this.likes = likes;
     this.specialization = specialization;
     this.shortDescription = shortDescription;
-    this.longDescription = longDescription;
     this.image = image;
     this.creationDate = new Date()
+  }
+
+// ******************************************** GET FUNCTIONS **********************************************
+  public getTitle(): string{
+    return this.title;
+  }
+
+  public getCaseStudyID(): string {
+    return this.caseStudyID;
+  }
+
+  public getCreatorID(): string {
+    return this.creatorID;
+  }
+
+  public getLikes(): number {
+    return this.likes;
+  }
+
+  public getSpecialization(): Specialization {
+    return this.specialization;
+  }
+
+  public getShortDescription(): string {
+    return this.shortDescription;
+  }
+
+  public getImage(): string {
+    return this.image;
   }
 
   public setLikes = (likes: number) => {
@@ -45,7 +74,6 @@ export class CaseStudyCards {
       likes: this.likes,
       specialization: this.specialization,
       shortDescription: this.shortDescription,
-      longDescription: this.longDescription,
       image: this.image,
       creationDate: this.creationDate
     })

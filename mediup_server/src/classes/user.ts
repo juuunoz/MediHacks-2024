@@ -1,18 +1,36 @@
+import { UUID } from 'crypto';
 import { Specialization } from './specialization';
+import { v4 as uuidv4 } from 'uuid';
 
+/**
+ * represents a user on the site
+ */
 export class User {
     // Define user properties with types
-    firstName: string;
-    lastName: string;
-    email: string;
-    occupation: string;
-    institution: string;
-    specialization: Specialization; // category chosen by user when account is first created
-    coursesCompleted: number; // number of courses completed
-    verified: boolean; // whether or not the user can create quizzes
-    points: number; // max of 1.7976931348623157×10^308 -> points accumulated by user
+    private firstName: string;
+    private lastName: string;
+    private email: string;
+    private occupation: string; // Student or occupation (or empty string)
+    private institution: string; // hospital/workplace or school (or empty string)
+    private specialization: Specialization; // category chosen by user when account is first created
+    private coursesCompleted: number; // number of courses completed
+    private verified: boolean; // whether or not the user can create quizzes
+    private points: number; // max of 1.7976931348623157×10^308 -> points accumulated by user
+    private userID: string; //2^122 possible unique ID's
   
     // ******************************* CONSTRUCTOR **************************************
+      /**
+     * Creates an instance of User.
+     * @param {string} firstName - The first name of the user.
+     * @param {string} lastName - The last name of the user.
+     * @param {string} email - The email address of the user.
+     * @param {string} occupation - The occupation of the user.
+     * @param {string} institution - The institution the user is affiliated with.
+     * @param {string} specialization - The specialization of the user.
+     * @param {number} coursesCompleted - The number of courses completed (default = 0)
+     * @param {boolean} verified - if the user is verified to make quizzes (default = false)
+     * @param {number} points - accumulated points by user (default = 0)
+     */
     constructor(
         firstName: string,
         lastName: string,
@@ -22,7 +40,7 @@ export class User {
         specialization: Specialization,
         coursesCompleted: number = 0,
         verified: boolean = false,
-        points: number = 0
+        points: number = 0,
       ) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -33,96 +51,101 @@ export class User {
         this.coursesCompleted = coursesCompleted;
         this.verified = verified;
         this.points = points;
+        this.userID = uuidv4(); // user v4 which generates random UUID
       }
     
     // *************************** ALL GET FUNCTIONS *********************************
-    getFirstName(): string {
+    public getFirstName(): string {
       return this.firstName;
     }
   
-    getLastName(): string {
+    public getLastName(): string {
       return this.lastName;
     }
   
-    getEmail(): string {
+    public getEmail(): string {
       return this.email;
     }
   
-    getOccupation(): string {
+    public getOccupation(): string {
       return this.occupation;
     }
   
-    getInstitution(): string {
+    public getInstitution(): string {
       return this.institution;
     }
   
-    getSpecialization(): string {
+    public getSpecialization(): string {
       return this.specialization;
     }
   
-    getCoursesCompleted(): number {
+    public getCoursesCompleted(): number {
       return this.coursesCompleted;
     }
   
-    isVerified(): boolean {
+    public isVerified(): boolean {
       return this.verified;
     }
   
-    getPoints(): number {
+    public getPoints(): number {
       return this.points;
     }
 
+    public getUserID(): string {
+      return this.userID;
+    }
+
     // Method to display full name
-    getFullName(): string {
+    public getFullName(): string {
       return `${this.firstName} ${this.lastName}`;
     }
 
     // Method to display user info
-    getUserInfo(): string {
+    public getUserInfo(): string {
       return `Name: ${this.getFullName()}, Email: ${this.email}, Occupation: ${this.occupation}, Institution: ${this.institution}, Specialization: ${this.specialization}, Courses Completed: ${this.coursesCompleted}, Verified: ${this.verified}, Points: ${this.points}`;
     }
 
 // ****************************** ADD, DELETE, UPDATE FUNCTIONS **************************
 
-    updateFirstName(newFirstName: string): void {
+    public updateFirstName(newFirstName: string): void {
       this.firstName = newFirstName;
     }
 
-    updateLastName(newLastName: string): void {
+    public updateLastName(newLastName: string): void {
       this.lastName = newLastName;
     }
 
-    updateEmail(newEmail: string): void {
+    public updateEmail(newEmail: string): void {
       this.email = newEmail;
     }
 
-    updateOccupation(newOccupation: string): void {
+    public updateOccupation(newOccupation: string): void {
       this.occupation = newOccupation;
     }
 
-    updateInstitution(newInstitution: string): void {
+    public updateInstitution(newInstitution: string): void {
       this.institution = newInstitution;
     }
 
-    updateSpecialization(newSpecialization: Specialization): void {
+    public updateSpecialization(newSpecialization: Specialization): void {
       this.specialization = newSpecialization;
     }
 
-    updateCoursesCompleted(newCoursesCompleted: number): void {
+    public updateCoursesCompleted(newCoursesCompleted: number): void {
       this.coursesCompleted = newCoursesCompleted;
     }
 
-    updateVerification(newStatus: boolean): void {
+    public updateVerification(newStatus: boolean): void {
       this.verified = newStatus;
     }
 
     // Method to add points
-    addPoints(points: number): void {
+    public addPoints(points: number): void {
       this.points += points;
     }
 
     // Method to delete points (ie, if user uses points)
-    deletePoints(points: number): void {
+    public deletePoints(points: number): void {
         if (this.points - points < 0) {
           throw new Error("Insufficient points. The total number of points cannot go below 0.");
         }

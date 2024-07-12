@@ -4,7 +4,7 @@
 import { useState } from 'react';
 import TempHeader from './components/tempHeader';
 import SelectQuestionType from './components/SelectQuestionType';
-import { ListOfQuestionTypes } from '../../models/Questions';
+import { ListOfQuestionTypes } from '../../util/enums';
 import CaseStudiesPage from './components/CaseStudiesPage';
 
 const Home = () => {
@@ -41,9 +41,9 @@ const Home = () => {
 
   return (
     <>
-      <div className='w-screen h-screen max-h-screen overflow-hidden flex flex-col justify-center items-center bg-white text-black'>
+      <div className='w-screen h-screen max-h-screen overflow-hidden flex flex-col items-center bg-white text-black'>
         <TempHeader />
-        <div className='w-screen h-screen flex flex-col justify-center items-center border border-red-800'>
+        <div className='w-screen h-5/6 flex flex-col justify-center items-center border border-red-800'>
           {questionType === ListOfQuestionTypes.NotSelected ? (
             <SelectQuestionType selectQuestionTopic={selectQuestionTopic} />
           ) : (

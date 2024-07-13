@@ -32,7 +32,7 @@ export const SampleQuizQandAs = {
       questionDescription:
         'A 55-year-old male presents with poorly controlled Type 2 Diabetes despite being on medication. This study explores various lifestyle interventions and medication adjustments that have shown significant improvements in glycemic control. Understanding these strategies is crucial for managing similar cases and improving patient outcomes.',
       questions: {
-        answer: 2,
+        answer: 3,
         questions: [
           {
             questionText: 'eeeeeeeeeeeeeeeeeeeeeeeee'
@@ -56,7 +56,7 @@ export const SampleQuizQandAs = {
       questionDescription:
         'A 55-year-old male presents with poorly controlled Type 2 Diabetes despite being on medication. This study explores various lifestyle interventions and medication adjustments that have shown significant improvements in glycemic control. Understanding these strategies is crucial for managing similar cases and improving patient outcomes.',
       questions: {
-        answer: 2,
+        answer: 1,
         questions: [
           {
             questionText: '3333333333333333333333333'

@@ -40,6 +40,10 @@ const CaseStudiesPage: FC<Props> = ({ backToSelectQuestionTopics }) => {
     setPageToggle(PageEnum.Home);
   };
 
+  const handleFinishQuiz = () => {
+    setPageToggle(PageEnum.Home);
+  };
+
   return (
     <>
       {pageToggle === PageEnum.Home ? (
@@ -60,6 +64,8 @@ const CaseStudiesPage: FC<Props> = ({ backToSelectQuestionTopics }) => {
         <ViewCaseStudy
           SingleCaseStudy={SingleCaseStudy}
           QuizQandAs={SampleQuizQandAs}
+          handleCloseCaseStudy={handleCloseCaseStudy}
+          handleFinishQuiz={handleFinishQuiz}
         />
       ) : null}
     </>

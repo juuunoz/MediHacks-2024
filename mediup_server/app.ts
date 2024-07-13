@@ -5,7 +5,7 @@ import mongoose from 'mongoose';
 import caseStudiesRoute from './src/routes/caseStudiesRoute';
 import authRoute from './src/routes/authRoute';
 import { AuthUserResponse } from './src/models/authModel';
-const AuthUserSchema = require('./src/schema/authUserSchema');
+import AuthUserSchema from './src/schema/authUserSchema';
 const bcrypt = require('bcryptjs');
 const cors = require('cors');
 const passport = require('passport');
@@ -58,7 +58,7 @@ export class App {
         },
         async (email: any, password: any, done: any) => {
           try {
-            const user: AuthUserResponse = await AuthUserSchema.findOne({
+            const user: AuthUserResponse | null = await AuthUserSchema.findOne({
               userEmail: email
             });
             if (!user) {

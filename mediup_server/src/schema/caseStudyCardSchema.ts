@@ -1,8 +1,8 @@
 import mongoose, { Schema, Document } from 'mongoose';
-import {cardQuizBase} from './cardQuizBase';
+import { cardQuizBase } from './cardQuizBase';
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import {authUserSchema} from './authUserSchema'; // leave this here
+import authUserSchema from './authUserSchema'; // leave this here
 import { Specialization } from '../classes/specialization';
 /* eslint-enable @typescript-eslint/no-unused-vars */
 
@@ -11,7 +11,7 @@ interface caseStudyCard extends cardQuizBase {
 }
 
 const caseStudyCardSchema: Schema = new Schema({
-  title:{
+  title: {
     type: String,
     required: true
   },
@@ -43,8 +43,11 @@ const caseStudyCardSchema: Schema = new Schema({
     type: String,
     required: true
   }
-})
+});
 
-const caseStudyCard = mongoose.model<caseStudyCard & Document>('caseStudyCard', caseStudyCardSchema);
+const caseStudyCard = mongoose.model<caseStudyCard & Document>(
+  'caseStudyCard',
+  caseStudyCardSchema
+);
 
 export default caseStudyCard;

@@ -23,7 +23,7 @@ const Login: FC = () => {
     e.preventDefault();
     const firstName = (e.target as HTMLFormElement).firstName.value;
     const lastName = (e.target as HTMLFormElement).lastName.value;
-    const Email = (e.target as HTMLFormElement).Email.value;
+    const email = (e.target as HTMLFormElement).Email.value;
     const occupation = (e.target as HTMLFormElement).occupation.value;
     const institution = (e.target as HTMLFormElement).institution.value;
     const specialization = (e.target as HTMLFormElement).specialization.value;
@@ -35,15 +35,62 @@ const Login: FC = () => {
       return;
     }
     try {
-      const url = '/api/auth/test';
-      const response = await axios.get(url);
+      const url = '/api/auth/signup';
+      const body = {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        occupation: occupation,
+        institution: institution,
+        specialization: specialization,
+        password: password1
+      };
+      const response = await axios.post(url, body);
+      // TODO: action after signup is done. Maybe go back to login page and login.
+      const signupData = response.data;
+      if (signupData === 'Error') {
+        return;
+      }
+      console.log(response);
+      setLoginToggle(true);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleLoginToSite = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const loginEmail = (e.target as HTMLFormElement).loginEmail.value;
+    const loginPassword = (e.target as HTMLFormElement).loginPassword.value;
+
+    if (
+      loginEmail === null ||
+      loginEmail === undefined ||
+      loginPassword === null ||
+      loginPassword === undefined
+    ) {
+      return;
+    }
+
+    try {
+      const url = '/api/auth/login';
+      const body = {
+        email: loginEmail,
+        password: loginPassword
+      };
+
+      const response = await axios.post(url, body);
+      const loginData = response.data;
+
+      // TODO: handle correct token
+      if (loginData.token) {
+        console.log('works');
+        return;
+      }
       console.log(response);
     } catch (err) {
       console.log(err);
     }
-
-    console.log('test');
-    // todo: submit to backend.
   };
 
   return (
@@ -63,7 +110,7 @@ const Login: FC = () => {
           MediUp
         </div>
         {loginToggle ? (
-          <>
+          <form onSubmit={handleLoginToSite}>
             {/* ======================== SIGN IN PAGE */}
             <div
               className=''
@@ -71,8 +118,8 @@ const Login: FC = () => {
             >
               {/* Username input */}
               <input
-                type='username'
-                placeholder='Username or Email'
+                name='loginEmail'
+                placeholder='Email'
                 className='border pl-1 text-blue-700 rounded-md text-md'
               />
             </div>
@@ -83,6 +130,7 @@ const Login: FC = () => {
               {/* Password input */}
               <input
                 type='password'
+                name='loginPassword'
                 placeholder='Password'
                 className='border pl-1 text-blue-700 rounded-md text-md'
               />
@@ -95,11 +143,11 @@ const Login: FC = () => {
               >
                 Sign up
               </button>
-              <button type='button' className='w-24 border mr-7 '>
+              <button type='submit' className='w-24 border mr-7 '>
                 Login
               </button>
             </div>
-          </>
+          </form>
         ) : (
           <>
             {/*======================================== SIGN UP PAGE */}

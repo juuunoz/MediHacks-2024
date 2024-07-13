@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
-export const authUserSchema = new mongoose.Schema({
+const authUserSchema = new mongoose.Schema({
   firstName: {
     type: String,
     required: true
@@ -50,7 +50,7 @@ export const authUserSchema = new mongoose.Schema({
     type: String,
     required: true
   }
-})
+});
 
 const AuthUserSchema = mongoose.model('AuthUserSchema', authUserSchema);
 

@@ -4,7 +4,7 @@ import * as Question from '../classes/question';
 import * as Content from '../classes/content';
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { authUserSchema } from './authUserSchema'; // leave this here
+import authUserSchema from './authUserSchema'; // leave this here
 /* eslint-enable @typescript-eslint/no-unused-vars */
 
 interface quizData extends cardQuizBase {

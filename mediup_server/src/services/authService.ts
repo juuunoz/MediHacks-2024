@@ -1,88 +1,83 @@
-import { NextFunction, ErrorRequestHandler, Request } from "express";
-import { AuthUserResponse, jwtToken, GetUserAuthInfoRequest } from "../models/authModel";
-const bcrypt = require("bcryptjs");
-const AuthUserSchema = require("../schema/authUserSchema");
-const jwt = require('jsonwebtoken');
-const passport = require('passport');
+import {
+  AuthUserResponse,
+  // jwtToken,
+  // GetUserAuthInfoRequest,
+  AuthUserSignUpRequest
+} from '../models/authModel';
+const bcrypt = require('bcryptjs');
+import AuthUserSchema from '../schema/authUserSchema';
+import { v4 as uuidv4 } from 'uuid';
 
 export class AuthService {
-  public signUp = async (req: Request) => {
+  public signUp = async (signUpInformation: AuthUserSignUpRequest) => {
     try {
-      const existingUser: AuthUserResponse = await AuthUserSchema.findOne({ userEmail: req.body.signupEmail});
-  
+      const existingUser: AuthUserResponse | null =
+        await AuthUserSchema.findOne({
+          userEmail: signUpInformation.email
+        });
+
       if (existingUser) {
-        return 'This email is already in use'
+        return 'This email is already in use';
       }
-  
+
       const saltLength = 10;
-      bcrypt.hash(req.body.signupPassword, saltLength, async(err: ErrorRequestHandler, hashedPassword: string) => {
-        const user = new AuthUserSchema({
-          userEmail: req.body.signupEmail,
-          userPassword: hashedPassword,
-          joinDate: new Date(),
-          firstName: req.body.signupFirstName,
-          lastName: req.body.signupLastName,
-        })
-        const result = await user.save();
-        return result;
-      })
-  
+      const hashedPassword: string = await new Promise((resolve, reject) => {
+        bcrypt.hash(
+          signUpInformation.password,
+          saltLength,
+          (err: any, hash: any) => {
+            if (err) reject(err);
+            resolve(hash);
+          }
+        );
+      });
+
+      const newUser = new AuthUserSchema({
+        firstName: signUpInformation.firstName,
+        lastName: signUpInformation.lastName,
+        userEmail: signUpInformation.email,
+        userPassword: hashedPassword,
+        occupation: signUpInformation.occupation,
+        institution: signUpInformation.institution,
+        specialization: signUpInformation.specialization,
+        coursesCompleted: 0,
+        verified: false,
+        points: 0,
+        joinDate: new Date(),
+        userID: uuidv4()
+      });
+
+      const result: AuthUserResponse = await newUser.save();
+      return result;
     } catch (err) {
       console.log(err);
+      return 'Error';
     }
   };
 
-  public logIn: any = async (req: GetUserAuthInfoRequest, res: Response, next: NextFunction) => {
-    passport.authenticate(
-      'login',
-      async (err: any, user: any, info: any) => {
-        try {
-          if (err || !user) {
-            const error = new Error('An error occurred.');
-  
-            return next(error);
-          }
-  
-          req.login(
-            user,
-            { session: false },
-            async (error: any) => {
-              if (error) return next(error);
-              const body = { 
-                _id: user._id, 
-                email: user.userEmail
-              };
-              const token = jwt.sign({ user: body }, process.env.JWT_SECRET, { expiresIn: '7d' });
-  
-              return token;
-            }
-          );
-        } catch (error) {
-          return next(error);
-        }
-      }
-    )(req, res, next);
-  }
+  // public verifyToken = async (req: Request) => {
+  //   const token: string = req.body.token;
+  //   if (token) {
+  //     const decodedToken: jwtToken = jwt.verify(token, process.env.JWT_SECRET);
+  //     const now = Date.now();
 
-  public verifyToken = async (req: Request) => {
-    const token: string = req.body.token;
-    if (token) {
-      const decodedToken: jwtToken = jwt.verify(token, process.env.JWT_SECRET);
-      const now = Date.now();
-  
-      if (decodedToken.exp > now) {
-        return 'Invalid token'
-      } else {
-        const body = { 
-          _id: decodedToken.user._id, 
-          email: decodedToken.user.email
-        };
-        const refreshToken: string = jwt.sign({ user: body }, process.env.JWT_SECRET, { expiresIn: '7d' });
-  
-        return refreshToken;
-      }
-    } else {
-      return "Invalid token"
-    }
-  }
+  //     if (decodedToken.exp > now) {
+  //       return 'Invalid token';
+  //     } else {
+  //       const body = {
+  //         _id: decodedToken.user._id,
+  //         email: decodedToken.user.email
+  //       };
+  //       const refreshToken: string = jwt.sign(
+  //         { user: body },
+  //         process.env.JWT_SECRET,
+  //         { expiresIn: '7d' }
+  //       );
+
+  //       return refreshToken;
+  //     }
+  //   } else {
+  //     return 'Invalid token';
+  //   }
+  // };
 }

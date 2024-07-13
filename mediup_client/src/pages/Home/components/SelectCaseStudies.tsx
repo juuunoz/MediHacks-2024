@@ -1,16 +1,20 @@
 import { FC } from 'react';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { CaseStudiesCard } from '../../../util/SampleCaseStudies';
+import { CaseStudyCards } from '../../../models/CaseStudy';
 
 interface Props {
   backToSelectQuestionTopics: () => void;
   toggleCreateQuiz: () => void;
+  toggleViewQuiz: () => void;
+  CaseStudiesCard: CaseStudyCards[];
 }
 
 const SelectCaseStudies: FC<Props> = ({
   backToSelectQuestionTopics,
-  toggleCreateQuiz
+  toggleCreateQuiz,
+  toggleViewQuiz,
+  CaseStudiesCard
 }) => {
   return (
     <>
@@ -60,9 +64,13 @@ const SelectCaseStudies: FC<Props> = ({
                 </div>
                 <div className='h-1/5 w-full flex flex-row justify-between items-center'>
                   <div>likes: {eachCaseStudyCard.likes}</div>
-                  <div>
-                    <button>Select</button>
-                  </div>
+                  <button
+                    type='button'
+                    className='z-10'
+                    onClick={() => toggleViewQuiz()}
+                  >
+                    Select
+                  </button>
                 </div>
               </div>
             </div>

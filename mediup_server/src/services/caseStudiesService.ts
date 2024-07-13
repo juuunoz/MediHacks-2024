@@ -28,6 +28,8 @@ export class CaseStudiesService {
       // slap in more variables here
     })
 
+    // then turn these into one object and return it
+
     return caseStudy
   }
 }

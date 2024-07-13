@@ -1,6 +1,6 @@
 // src/components/Login.tsx
-import { FC, useState, useEffect } from "react";
-import { Specialization } from '../../util/';
+import { FC, useState } from "react";
+import { Specialization } from "../../util/enums";
 
 const Login: FC = () => {
   const [loginToggle, setLoginToggle] = useState(true);
@@ -95,30 +95,25 @@ const Login: FC = () => {
                 className="border pl-1 text-blue-700 rounded-md text-md"
               />
 
-              <div>
-              
+              <div></div>
+              <div className="flex w-4/5 justify-center items-center my-4">
+                <div className="text-4xl w-1/2 mr-8 h-14 rounded-xl bg-gray-200 border-gray-400 border">
+                  Select the Topic Specialization:
                 </div>
-                <div className='flex w-4/5 justify-center items-center my-4'>
-              <div className='text-4xl w-1/2 mr-8 h-14 rounded-xl bg-gray-200 border-gray-400 border'>
-                Select the Topic Specialization:
-              </div>
                 <select
-                  className='w-1/2 bg-gray-200 text-4xl h-14 rounded-xl border-gray-400 border'
-                  name='specilization'
+                  className="w-1/2 bg-gray-200 text-4xl h-14 rounded-xl border-gray-400 border"
+                  name="specilization"
                   required
                 >
                   {Object.entries(Specialization).map(([key, value]) => {
                     return (
-                      <option className='text-lg' key={key}>
+                      <option className="text-lg" key={key}>
                         {value}
                       </option>
                     );
                   })}
                 </select>
               </div>
-
-              </div>
-
             </div>
             <div
               className="border"

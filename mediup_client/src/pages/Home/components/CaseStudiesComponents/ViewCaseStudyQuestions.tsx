@@ -1,14 +1,23 @@
 import { FC } from 'react';
 import { QuizQuestionAnswers } from '../../../../models/CaseStudy';
 
+enum CheckAnswerState {
+  Empty,
+  Wrong,
+  Correct
+}
+
 interface Props {
   QuizQandAs: QuizQuestionAnswers;
   pages: number[];
   currPageNum: number;
   nextPage: () => void;
-  prevPage: () => void;
   selectedQuestion: null | number;
   handleSelectQuestion: (selectQuestionNumber: number) => void;
+  handleCheckAnswer: () => void;
+  selectedAnswerArray: (null | number)[];
+  checkAnswerState: CheckAnswerState;
+  handleFinishQuiz: () => void;
 }
 
 const ViewCaseStudyQuestions: FC<Props> = ({
@@ -16,9 +25,12 @@ const ViewCaseStudyQuestions: FC<Props> = ({
   pages,
   currPageNum,
   nextPage,
-  prevPage,
   selectedQuestion,
-  handleSelectQuestion
+  handleSelectQuestion,
+  handleCheckAnswer,
+  selectedAnswerArray,
+  checkAnswerState,
+  handleFinishQuiz
 }) => {
   // Ensure currPageNum is within bounds
   if (currPageNum < 1 || currPageNum > QuizQandAs.data.length) {
@@ -26,6 +38,7 @@ const ViewCaseStudyQuestions: FC<Props> = ({
   }
 
   const currentPage = QuizQandAs.data[currPageNum - 1];
+  console.log(selectedAnswerArray);
   return (
     <>
       <div className='flex flex-row h-full w-full'>
@@ -38,8 +51,14 @@ const ViewCaseStudyQuestions: FC<Props> = ({
             const currQuestionNumber = index + 1;
             const bgColor =
               selectedQuestion === currQuestionNumber
-                ? 'bg-purple-300'
-                : 'bg-gray-200 ';
+                ? 'bg-purple-200'
+                : checkAnswerState === CheckAnswerState.Correct &&
+                  selectedAnswerArray[currPageNum - 1] === currQuestionNumber
+                ? 'bg-green-200'
+                : checkAnswerState === CheckAnswerState.Wrong &&
+                  selectedAnswerArray[currPageNum - 1] === currQuestionNumber
+                ? 'bg-red-200'
+                : 'bg-gray-200';
             return (
               <div
                 className={`flex h-auto items-center m-4 p-6 border border-black rounded-full ${bgColor}`}
@@ -56,9 +75,9 @@ const ViewCaseStudyQuestions: FC<Props> = ({
         </div>
       </div>
       <div className='flex flex-row justify-center items-center mt-4'>
-        <div onClick={() => nextPage()} className='mb-2'>
+        {/* <div onClick={() => prevPage()} className='mb-2'>
           {'<'}
-        </div>
+        </div> */}
         {pages.map((value, index) => {
           const bgColor =
             currPageNum === value ? 'bg-purple-900' : 'bg-purple-400';
@@ -71,9 +90,30 @@ const ViewCaseStudyQuestions: FC<Props> = ({
             </div>
           );
         })}
-        <div onClick={() => prevPage()} className='mb-2'>
-          {'>'}
-        </div>
+        {checkAnswerState === CheckAnswerState.Correct &&
+        currPageNum === pages.length ? (
+          <button
+            className='absolute right-52 text-3xl rounded-full bg-green-400'
+            onClick={() => handleFinishQuiz()}
+          >
+            Finish Quiz!
+          </button>
+        ) : checkAnswerState === CheckAnswerState.Correct &&
+          currPageNum !== pages.length ? (
+          <button
+            className='absolute right-52 text-3xl rounded-full bg-green-400'
+            onClick={() => nextPage()}
+          >
+            Next Question
+          </button>
+        ) : (
+          <button
+            className='absolute right-52 text-3xl rounded-full bg-purple-400'
+            onClick={() => handleCheckAnswer()}
+          >
+            Check Answer
+          </button>
+        )}
       </div>
     </>
   );

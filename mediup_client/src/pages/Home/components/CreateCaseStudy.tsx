@@ -42,13 +42,12 @@ const CreateCaseStudy: FC<Props> = ({ handleSubmit, handleCloseCaseStudy }) => {
 
   return (
     <>
-      <div className='absolute left-4 top-32'>
+      <div className='absolute left-6 top-36'>
         <button
-          className=' h-18 text-3xl mt-8 mx-4'
-          type='button'
           onClick={() => handleCloseCaseStudy()}
+          className='w-auto h-auto text-3xl bg-gray-200'
         >
-          Go Back
+          Back
         </button>
       </div>
       <div className='text-6xl pb-8'>Create Your Case Study</div>

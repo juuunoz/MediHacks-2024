@@ -1,4 +1,4 @@
-import { CaseStudy } from "../models/caseStudiesModel";
+import { CaseStudy } from '../models/caseStudiesModel';
 
 export class CaseStudiesService {
   private caseStudies: CaseStudy[] = [];
@@ -10,7 +10,7 @@ export class CaseStudiesService {
   public createCaseStudy(caseStudy: Omit<CaseStudy, 'id'>): CaseStudy {
     const newCaseStudy = {
       ...caseStudy,
-      id: this.caseStudies.length + 1,
+      id: this.caseStudies.length + 1
     };
     this.caseStudies.push(newCaseStudy);
     return newCaseStudy;

@@ -9,11 +9,11 @@ export interface CaseStudyCards {
   creationDate: string;
 }
 
-interface Question {
+export interface Question {
   questionText: string;
 }
 
-interface Questions {
+export interface Questions {
   answer: number;
   questions: Question[];
 }
@@ -25,4 +25,16 @@ export interface QuizQuestionAnswers {
     questionDescription: string;
     questions: Questions;
   }[];
+}
+
+export interface CaseStudyCardSubmitPackage {
+  title: string;
+  shortDescription: string;
+  specilization: string;
+}
+
+export interface CaseStudyQuestionsSubmitPackage {
+  questionTitle: string;
+  questionDescription: string;
+  questions: Questions;
 }

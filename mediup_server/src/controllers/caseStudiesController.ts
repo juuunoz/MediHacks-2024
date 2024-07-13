@@ -15,18 +15,10 @@ export class CaseStudiesController {
   }
 
   public createCaseStudy = (req: Request, res: Response): void => {
-    const { title, description, date } = req.body;
+    // req.body
 
-    if (!title || !description || !date) {
-      res.status(400).json({ message: 'Missing required fields' });
-      return;
-    }
 
-    const newCaseStudy: Omit<CaseStudy, 'id'> = {
-      title,
-    };
-
-    const createdCaseStudy = this.caseStudiesService.createCaseStudy(newCaseStudy);
+    const createdCaseStudy = this.caseStudiesService.createCaseStudy(req.body);
     res.status(201).json(createdCaseStudy);
   }
 }

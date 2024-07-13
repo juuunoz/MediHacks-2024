@@ -65,7 +65,7 @@ export class Quiz extends CaseStudyCards{
     }
 
     public getCreationDate(): Date{
-      return this.creationDate;
+      return this.identicalCreationDate;
     }
     
     /** function to get the current (single) question */

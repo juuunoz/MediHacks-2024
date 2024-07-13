@@ -14,43 +14,60 @@ interface quizData extends cardQuizBase {
 }
 
 const quizSchema: Schema = new Schema({
-  title:{
-    type: String,
-    required: true
-  },
-  creatorID: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'authUserSchema',
-    required: true
-  },
-  likes: {
-    type: Number,
-    required: true
-  },
-  specialization: {
-    type: String, // Using String type for enum handling
-    required: true
-  },
-  shortDescription: {
-    type: String,
-    required: true
-  },
-  creationDate: {
-    type: Date,
-    required: true
-  },
+  // title:{
+  //   type: String,
+  //   required: true
+  // },
+  // creatorID: {
+  //   type: String,
+  //   required: true
+  // },
+  // likes: {
+  //   type: Number,
+  //   required: true
+  // },
+  // specialization: {
+  //   type: String, // Using String type for enum handling
+  //   required: true
+  // },
+  // shortDescription: {
+  //   type: String,
+  //   required: true
+  // },
+  // creationDate: {
+  //   type: Date,
+  //   required: true
+  // },
   caseStudyID: {
     type: String,
     required: true
   },
-  // questions: {
-  //   type: Question.Question[],
-  //   required: true
-  // },
-  // contents: {
-  //   type: Content.Content[],
-  //   required: true
-  // }
+  data: {
+    type: Map,
+    of: {
+      questionTitle: {
+        type: String,
+        required: true
+      },
+      questionDescription: {
+        type: String,
+        required: true
+      },
+      questions: {
+        type: Map,
+        of: {
+          questionText: {
+            type: String,
+            required: true,
+          }
+        }
+      },
+      answer: {
+        type: Number,
+        required: true
+      }
+    }
+  },
 })
 
 const quizData = mongoose.model<quizData & Document>('quizData', quizSchema);

@@ -20,8 +20,7 @@ const caseStudyCardSchema: Schema = new Schema({
     required: true
   },
   creatorID: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'authUserSchema',
+    type: String,
     required: true
   },
   likes: {

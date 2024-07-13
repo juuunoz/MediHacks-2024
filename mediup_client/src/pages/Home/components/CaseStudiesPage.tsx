@@ -7,6 +7,11 @@ import ViewCaseStudy from './ViewCaseStudy';
 import { CaseStudiesCard } from '../../../util/SampleCaseStudies';
 import { SampleQuizQandAs } from '../../../util/SampleQuizQandAs';
 import { SingleCaseStudy } from '../../../util/SingleCaseStudy';
+import {
+  CaseStudyCardSubmitPackage,
+  CaseStudyQuestionsSubmitPackage,
+  Question
+} from '../../../models/CaseStudy';
 
 interface Props {
   backToSelectQuestionTopics: () => void;
@@ -16,12 +21,10 @@ const CaseStudiesPage: FC<Props> = ({ backToSelectQuestionTopics }) => {
   const [pageToggle, setPageToggle] = useState<PageEnum>(PageEnum.Home);
 
   const toggleCreateQuiz = () => {
-    console.log('createquiz');
     setPageToggle(PageEnum.CreateQuiz);
   };
 
   const toggleViewQuiz = () => {
-    console.log('test');
     setPageToggle(PageEnum.ViewQuiz);
   };
 
@@ -32,7 +35,69 @@ const CaseStudiesPage: FC<Props> = ({ backToSelectQuestionTopics }) => {
       .caseStudyDescription.value;
     const specilization = (e.target as HTMLFormElement).specilization.value;
 
-    console.log(caseStudyTitle, caseStudyDescription, specilization);
+    const caseStudyCard: CaseStudyCardSubmitPackage = {
+      title: caseStudyTitle,
+      shortDescription: caseStudyDescription,
+      specilization: specilization
+    };
+
+    const caseStudyQuestions: CaseStudyQuestionsSubmitPackage[] = [];
+
+    let continueIteration = true;
+    let questionNumber = 1;
+
+    while (continueIteration) {
+      const currQuestionTitle = (e.target as HTMLFormElement)[
+        `questionTitle_${questionNumber}`
+      ];
+      if (currQuestionTitle === undefined) {
+        continueIteration = false;
+        break;
+      }
+
+      const eachQuestion: CaseStudyQuestionsSubmitPackage = {
+        questionTitle: (e.target as HTMLFormElement)[
+          `questionTitle_${questionNumber}`
+        ].value,
+        questionDescription: (e.target as HTMLFormElement)[
+          `questionDescription_${questionNumber}`
+        ].value,
+        questions: {
+          answer: parseInt(
+            (e.target as HTMLFormElement)[`answer_${questionNumber}`].value
+          ),
+          questions: []
+        }
+      };
+
+      let continueEachQuestionIteration = true;
+      let eachAnswerNumber = 1;
+
+      while (continueEachQuestionIteration) {
+        const currQuestion = (e.target as HTMLFormElement)[
+          `answer${eachAnswerNumber}_${questionNumber}`
+        ];
+        if (currQuestion === undefined) {
+          continueEachQuestionIteration = false;
+          break;
+        }
+
+        const answerText: Question = {
+          questionText: (e.target as HTMLFormElement)[
+            `answer${eachAnswerNumber}_${questionNumber}`
+          ].value
+        };
+
+        eachQuestion.questions.questions.push(answerText);
+
+        eachAnswerNumber++;
+      }
+
+      caseStudyQuestions.push(eachQuestion);
+      questionNumber++;
+    }
+
+    console.log(caseStudyCard, caseStudyQuestions);
     // todo: submit to backend.
   };
 

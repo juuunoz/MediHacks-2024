@@ -9,19 +9,35 @@ interface Props {
 
 const CreateCaseStudy: FC<Props> = ({ handleSubmit, handleCloseCaseStudy }) => {
   const [numOfQuestions, setNumOfQuestions] = useState<number[]>([1]);
+  const [answerArray, setAnswerArray] = useState<(number | null)[]>([null]);
 
   const handleAddQuestion = () => {
     const newNumOfQuestion = [...numOfQuestions];
-    newNumOfQuestion.push(numOfQuestions.length);
+    newNumOfQuestion.push(numOfQuestions.length + 1);
+
+    const newAnswerArray = [...answerArray];
+    newAnswerArray.push(null);
 
     setNumOfQuestions(newNumOfQuestion);
+    setAnswerArray(newAnswerArray);
   };
 
   const handleDeleteQuestion = () => {
     const newNumOfQuestion = [...numOfQuestions];
     newNumOfQuestion.pop();
 
+    const newAnswerArray = [...answerArray];
+    newAnswerArray.pop();
+
     setNumOfQuestions(newNumOfQuestion);
+    setAnswerArray(newAnswerArray);
+  };
+
+  const handleUpdateAnswerArray = (index: number, answer: number) => {
+    const newAnswerArray = [...answerArray];
+    newAnswerArray[index] = answer;
+
+    setAnswerArray(newAnswerArray);
   };
 
   return (
@@ -35,17 +51,17 @@ const CreateCaseStudy: FC<Props> = ({ handleSubmit, handleCloseCaseStudy }) => {
           Go Back
         </button>
       </div>
-      <div className='absolute right-4 top-32'>
-        <button className='w-48 h-18 text-3xl mt-8' type='submit'>
-          Submit
-        </button>
-      </div>
       <div className='text-6xl pb-8'>Create Your Case Study</div>
       <div className='py-5 h-5/6 w-4/5 flex flex-col items-center text-6xl border border-black'>
         <form
           className='h-full w-full flex flex-col items-center overflow-auto'
           onSubmit={handleSubmit}
         >
+          <div className='absolute right-4 top-32'>
+            <button className='w-48 h-18 text-3xl mt-8' type='submit'>
+              Submit
+            </button>
+          </div>
           <div className='w-full my-4 flex flex-col items-center'>
             <input
               className='w-4/5 mb-4 pl-4 bg-gray-200 rounded-xl border-gray-400 border'
@@ -80,7 +96,14 @@ const CreateCaseStudy: FC<Props> = ({ handleSubmit, handleCloseCaseStudy }) => {
             </select>
           </div>
           {Object.entries(numOfQuestions).map(([key, value]) => {
-            return <QuestionAnswers key={key} questionNumber={value} />;
+            return (
+              <QuestionAnswers
+                key={key}
+                questionNumber={value}
+                handleUpdateAnswerArray={handleUpdateAnswerArray}
+                answerArray={answerArray}
+              />
+            );
           })}
           <div className='flex justify-end w-4/5'>
             {numOfQuestions.length == 1 ? null : (

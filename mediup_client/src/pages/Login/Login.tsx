@@ -1,6 +1,7 @@
 // src/components/Login.tsx
 import { FC, useState } from "react";
-import { Specialization } from "../../util/enums";
+import axios from "axios";
+
 
 const Login: FC = () => {
   const [loginToggle, setLoginToggle] = useState(true);
@@ -19,12 +20,39 @@ const Login: FC = () => {
     setLoginToggle(true);
   };
 
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const firstName = (e.target as HTMLFormElement).firstName.value;
+    const lastName = (e.target as HTMLFormElement).lastName.value;
+    const Email = (e.target as HTMLFormElement).Email.value;
+    const occupation = (e.target as HTMLFormElement).occupation.value;
+    const institution = (e.target as HTMLFormElement).institution.value;
+    const specialization = (e.target as HTMLFormElement).specialization.value;
+    const password1 = (e.target as HTMLFormElement).password1.value;
+    const password2 = (e.target as HTMLFormElement).password2.value;
+
+    if (password1 !== password2) {
+      console.log("Error: Password mismatch");
+      return;
+    }
+    try {
+      const url = "/api/auth/test";
+      const response = await axios.get(url);
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
+
+    console.log("test");
+    // todo: submit to backend.
+  };
+
   return (
-    <div className="w-screen h-screen overflow-hidden flex justify-center items-center bg-black">
+    <div className=" w-screen h-screen overflow-hidden flex justify-center items-center bg-black">
       <div className="w-80 h-96 flex flex-col border ">
         {/* Login title MediUp */}
         <div
-          className="border"
+          className=""
           style={{
             textAlign: "center",
             marginBottom: "10%",
@@ -39,7 +67,7 @@ const Login: FC = () => {
           <>
             {/* ======================== SIGN IN PAGE */}
             <div
-              className="border"
+              className=""
               style={{ marginBottom: "10px", textAlign: "center" }}
             >
               {/* Username input */}
@@ -50,7 +78,7 @@ const Login: FC = () => {
               />
             </div>
             <div
-              className="border"
+              className=""
               style={{ marginBottom: "20px", textAlign: "center" }}
             >
               {/* Password input */}
@@ -60,87 +88,104 @@ const Login: FC = () => {
                 className="border pl-1 text-blue-700 rounded-md text-md"
               />
             </div>
-            <div className="flex flex-row border justify-center pl-5 py-10">
-              <button className="p-8 m-8 " onClick={handleSignupButton}>
+            <div className="flex flex-row border justify-center ">
+              <button
+                type="button"
+                className="w-24  mr-7 "
+                onClick={handleSignupButton}
+              >
                 Sign up
               </button>
-              <button className="w-24 border">Login julia is aweomse</button>
+              <button type="button" className="w-24 border mr-7 ">
+                Login
+              </button>
             </div>
           </>
         ) : (
           <>
             {/*======================================== SIGN UP PAGE */}
-            <div
-              className="border"
+            <form
+              onSubmit={handleSubmit}
+              className=""
               style={{ marginBottom: "10px", textAlign: "center" }}
             >
               <div className="flex flex-row mb-3">
                 {/* First name input */}
                 <input
-                  type="First Name"
                   placeholder="First Name"
-                  className="border pl-1 text-blue-700 rounded-md text-md w-24 ml-10"
+                  name="firstName"
+                  className=" pl-1 text-white rounded-md text-md w-24 ml-10"
                 />
                 {/* Last name input */}
                 <input
-                  type="Last Name"
                   placeholder="Last Name"
-                  className="border pl-1 text-blue-700 rounded-md text-md w-24 ml-5 "
+                  name="lastName"
+                  className=" pl-1 text-white rounded-md text-md w-24 ml-5 "
                 />
               </div>
               {/* Email input */}
               <input
                 type="email"
+                name="Email"
                 placeholder="Email"
-                className="border pl-1 text-blue-700 rounded-md text-md"
+                className=" pl-1 text-white rounded-md text-md"
               />
 
-              <div></div>
-              <div className="flex w-4/5 justify-center items-center my-4">
-                <div className="text-4xl w-1/2 mr-8 h-14 rounded-xl bg-gray-200 border-gray-400 border">
-                  Select the Topic Specialization:
-                </div>
-                <select
-                  className="w-1/2 bg-gray-200 text-4xl h-14 rounded-xl border-gray-400 border"
-                  name="specilization"
-                  required
-                >
-                  {Object.entries(Specialization).map(([key, value]) => {
-                    return (
-                      <option className="text-lg" key={key}>
-                        {value}
-                      </option>
-                    );
-                  })}
-                </select>
+              <input
+                placeholder="Occupation"
+                name="occupation"
+                className=" pl-1 text-white rounded-md text-md mt-2"
+              />
+
+              <input
+                placeholder="Institution"
+                name="institution"
+                className=" pl-1 text-white rounded-md text-md mt-2"
+              />
+
+              <input
+                placeholder="Specialization"
+                name="specialization"
+                className=" pl-1 text-white rounded-md text-md mt-2"
+              />
+
+              <div
+                className=""
+                style={{ marginBottom: "20px", textAlign: "center" }}
+              >
+                {/* Password input */}
+                <input
+                  type="password"
+                  name="password1"
+                  placeholder="Password"
+                  className=" pl-1 text-white rounded-md text-md mt-2"
+                />
+
+                {/* RE-ENTER PASSWORD  */}
+                <input
+                  type="password"
+                  name="password2"
+                  placeholder="Re-enter Password"
+                  className=" pl-1 text-white rounded-md text-md mt-2"
+                />
               </div>
-            </div>
-            <div
-              className="border"
-              style={{ marginBottom: "20px", textAlign: "center" }}
-            >
-              {/* Password input */}
-              <input
-                type="password"
-                placeholder="Password"
-                className="border pl-1 text-blue-700 rounded-md text-md"
-              />
 
-              {/* RE-ENTER PASSWORD  */}
-              <input
-                type="password"
-                placeholder="Re-enter Password"
-                className="border pl-1 text-blue-700 rounded-md text-md"
-              />
-            </div>
-            <div className="flex flex-row border justify-center py-10">
-              {/* <button className="p-8 m-8 " onClick={handleSignupButton}>
+              <div className="flex flex-row  justify-center py-4 bg-">
+                {/* <button className="p-8 m-8 " onClick={handleSignupButton}>
                 Sign up
               </button> */}
-              <button className="w-24 border" onClick={handleLoginButton}>
-                Finish
-              </button>
-            </div>
+                <button
+                  type="button"
+                  className="w-24 border mr-7 bg-gray-500"
+                  onClick={handleLoginButton}
+                >
+                  Back
+                </button>
+                <button type="submit" className="w-24 border ml-7 bg-gray-500">
+                  Sign up
+                </button>
+              </div>
+            </form>
           </>
         )}
 

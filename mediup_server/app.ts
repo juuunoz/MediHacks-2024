@@ -7,6 +7,7 @@ import authRoute from './src/routes/authRoute';
 import { AuthUserResponse } from './src/models/authModel';
 const AuthUserSchema = require("./src/schema/authUserSchema");
 const bcrypt = require("bcryptjs");
+const cors = require('cors');
 const passport = require('passport');
 const localStrategy = require('passport-local').Strategy;
 const JWTstrategy = require('passport-jwt').Strategy;
@@ -33,6 +34,9 @@ export class App {
   private setupMiddleware() {
     this.app.use(bodyParser.urlencoded({ extended: true }));
     this.app.use(bodyParser.json());
+    this.app.use(cors({
+      origin: 'http://localhost:5173/' // Replace with your frontend URL
+    }));
   }
 
   private setupMongoConnection() {

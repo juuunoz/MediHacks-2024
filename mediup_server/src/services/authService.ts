@@ -1,7 +1,7 @@
 import { NextFunction, ErrorRequestHandler, Request } from "express";
 import { AuthUserResponse, jwtToken, GetUserAuthInfoRequest } from "../models/authModel";
 const bcrypt = require("bcryptjs");
-const AuthUserSchema = require("../models/authUserSchema");
+const AuthUserSchema = require("../schema/authUserSchema");
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
 

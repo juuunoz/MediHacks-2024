@@ -7,6 +7,8 @@ interface Props {
   currPageNum: number;
   nextPage: () => void;
   prevPage: () => void;
+  selectedQuestion: null | number;
+  handleSelectQuestion: (selectQuestionNumber: number) => void;
 }
 
 const ViewCaseStudyQuestions: FC<Props> = ({
@@ -14,7 +16,9 @@ const ViewCaseStudyQuestions: FC<Props> = ({
   pages,
   currPageNum,
   nextPage,
-  prevPage
+  prevPage,
+  selectedQuestion,
+  handleSelectQuestion
 }) => {
   // Ensure currPageNum is within bounds
   if (currPageNum < 1 || currPageNum > QuizQandAs.data.length) {
@@ -22,7 +26,6 @@ const ViewCaseStudyQuestions: FC<Props> = ({
   }
 
   const currentPage = QuizQandAs.data[currPageNum - 1];
-  console.log(currentPage.questions);
   return (
     <>
       <div className='flex flex-row h-full w-full'>
@@ -30,9 +33,25 @@ const ViewCaseStudyQuestions: FC<Props> = ({
           <div className='text-4xl mb-8'>{currentPage.questionTitle}</div>
           <div className='text-3xl'>{currentPage.questionDescription}</div>
         </div>
-        <div className='border w-1/2 h-full border-red-500 rounded-3xl ml-8'>
+        <div className='w-1/2 h-full justify-between flex flex-col rounded-3xl ml-8'>
           {currentPage.questions.questions.map((value, index) => {
-            return <div key={index}>{value[index].questionText}</div>;
+            const currQuestionNumber = index + 1;
+            const bgColor =
+              selectedQuestion === currQuestionNumber
+                ? 'bg-purple-300'
+                : 'bg-gray-200 ';
+            return (
+              <div
+                className={`flex h-auto items-center m-4 p-6 border border-black rounded-full ${bgColor}`}
+                onClick={() => handleSelectQuestion(currQuestionNumber)}
+                key={currQuestionNumber}
+              >
+                <div>{currQuestionNumber}.</div>
+                <div className='text-2xl ml-4 text-ellipsis overflow-auto max-h-20'>
+                  {value.questionText}
+                </div>
+              </div>
+            );
           })}
         </div>
       </div>

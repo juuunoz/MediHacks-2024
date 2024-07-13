@@ -9,11 +9,13 @@ export interface CaseStudyCards {
   creationDate: string;
 }
 
+interface Question {
+  questionText: string;
+}
+
 interface Questions {
   answer: number;
-  questions: {
-    questionText: string;
-  }[];
+  questions: Question[];
 }
 
 export interface QuizQuestionAnswers {

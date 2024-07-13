@@ -9,31 +9,37 @@ interface Props {
 }
 
 const ViewCaseStudy: FC<Props> = ({ SingleCaseStudy, QuizQandAs }) => {
-  const [pages, setPages] = useState<number[]>([1, 2, 3, 4, 5]);
+  const [pages, setPages] = useState<number[]>([]);
   const [currPageNum, setCurrPageNum] = useState(1);
   const [startedQuiz, setStartedQuiz] = useState(false);
+  const [selectedQuestion, setSelectedQuestion] = useState<null | number>(1);
 
-  // useEffect(() => {
-  //   const pageArray = [];
-  //   for (let i = 0; i < QuizQandAs[i].data.length; i++) {
-  //     pageArray.push(i + 1);
-  //   }
-  //   setPages(pageArray);
-  // }, []);
+  useEffect(() => {
+    const pageArray = [];
+    for (let i = 0; i < QuizQandAs.data.length; i++) {
+      pageArray.push(i + 1);
+    }
+    setPages(pageArray);
+  }, [QuizQandAs]);
+
   const nextPage = () => {
-    if (currPageNum === 1) {
+    if (currPageNum === 1 || selectedQuestion === null) {
       return;
     }
-
+    setSelectedQuestion(null);
     setCurrPageNum(currPageNum - 1);
   };
 
   const prevPage = () => {
-    if (currPageNum === pages.length) {
+    if (currPageNum === pages.length || selectedQuestion === null) {
       return;
     }
-
+    setSelectedQuestion(null);
     setCurrPageNum(currPageNum + 1);
+  };
+
+  const handleSelectQuestion = (selectQuestionNumber: number) => {
+    setSelectedQuestion(selectQuestionNumber);
   };
 
   return (
@@ -51,6 +57,8 @@ const ViewCaseStudy: FC<Props> = ({ SingleCaseStudy, QuizQandAs }) => {
             currPageNum={currPageNum}
             nextPage={nextPage}
             prevPage={prevPage}
+            selectedQuestion={selectedQuestion}
+            handleSelectQuestion={handleSelectQuestion}
           />
         )}
       </div>

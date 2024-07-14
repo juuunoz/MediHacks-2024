@@ -8,9 +8,25 @@ import {
 import { v4 as uuidv4 } from 'uuid';
 
 export class CaseStudiesService {
-  public getAllCaseStudies() {
-    return;
-  }
+  public getAllCaseStudyCards = async (specialization: string) => {
+    try {
+      const filter = specialization ? { specialization } : {};
+      const caseStudies = await CaseStudyCardSchema.find(filter);
+      return caseStudies;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  public getCaseStudyQuestion = async (caseStudyID: string) => {
+    try {
+      const filter = caseStudyID ? { caseStudyID } : {};
+      const caseStudies = await QuizSchema.find(filter);
+      return caseStudies;
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   public createCaseStudy = async (
     createCaseStudyRequest: CreateCaseStudyRequest

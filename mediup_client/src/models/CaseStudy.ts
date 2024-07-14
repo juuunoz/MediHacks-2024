@@ -39,3 +39,8 @@ export interface CaseStudyQuestionsSubmitPackage {
   questionDescription: string;
   questions: Questions;
 }
+
+export interface CreateCaseStudyRequest {
+  caseStudy: CaseStudyCardSubmitPackage;
+  questions: CaseStudyQuestionsSubmitPackage[];
+}

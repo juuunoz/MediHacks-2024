@@ -17,9 +17,8 @@ const quizSchema: Schema = new Schema({
     type: String,
     required: true
   },
-  data: {
-    type: Map,
-    of: {
+  data: [
+    {
       questionTitle: {
         type: String,
         required: true
@@ -29,22 +28,23 @@ const quizSchema: Schema = new Schema({
         required: true
       },
       questions: {
-        type: Map,
-        of: {
-          questionText: {
-            type: String,
-            required: true
+        answer: {
+          type: Number,
+          required: true
+        },
+        questions: [
+          {
+            questionText: {
+              type: String,
+              required: true
+            }
           }
-        }
-      },
-      answer: {
-        type: Number,
-        required: true
+        ]
       }
     }
-  }
+  ]
 });
 
-const quizData = mongoose.model<quizData & Document>('quizData', quizSchema);
+const QuizSchema = mongoose.model('QuizSchema', quizSchema);
 
-export default quizData;
+export default QuizSchema;

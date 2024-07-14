@@ -5,19 +5,11 @@ import createQuizButtonImage from '../../../assets/navbar-plus.svg';
 
 const NavBar = () => {
   const accountButton = (): JSX.Element => {
-    return (
-      <Link to='/profile'>
-        <img src={accountButtonImage} alt='profile settings' />
-      </Link>
-    );
+    return <img src={accountButtonImage} alt='profile settings' />;
   };
 
   const createQuizButton = (): JSX.Element => {
-    return (
-      <Link to='/createquiz'>
-        <img src={createQuizButtonImage} alt='create a new quiz' />
-      </Link>
-    );
+    return <img src={createQuizButtonImage} alt='create a new quiz' />;
   };
 
   const buildNavbar = (): JSX.Element => {

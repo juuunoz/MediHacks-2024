@@ -31,7 +31,8 @@ export class CaseStudiesService {
         specialization: caseStudyCardRequest.specilization,
         shortDescription: caseStudyCardRequest.shortDescription,
         creationDate: creationDate,
-        image: 'test'
+        image:
+          'https://cdn.discordapp.com/attachments/1261133002549760050/1261933223223754763/image.png?ex=6694c266&is=669370e6&hm=508a70df94808f69ac2976f6e0f912982e4f9015938e576d1a82910f803c47bb&'
       });
 
       const newCaseStudyQuestion = new QuizSchema({

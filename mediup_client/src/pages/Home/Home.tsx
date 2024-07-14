@@ -6,6 +6,7 @@ import CaseStudiesPage from './components/CaseStudiesPage';
 import LoginAndSignup from './components/LoginAndSignup';
 import axios from 'axios';
 import { LoginResponse, UserDetails } from '../../models/User';
+import { CaseStudyCards } from '../../models/CaseStudy';
 
 const Home = () => {
   const [loggedInUser, setLoggedInUser] = useState<UserDetails | null>(null);
@@ -13,10 +14,22 @@ const Home = () => {
   const [questionType, setQuestionType] = useState<ListOfQuestionTypes>(
     ListOfQuestionTypes.NotSelected
   );
+  const [caseStudyCards, setCaseStudyCards] = useState<CaseStudyCards[] | null>(
+    null
+  );
 
-  const selectQuestionTopic = () => {
-    // TODO: call API to retrieve list of questions for the specific topic
-    // TODO: create new state to store the retrieved data to be used by CaseStudiesPage
+  const selectQuestionTopic = async (specType: string) => {
+    try {
+      const url = '/api/casestudies/getAllCards';
+      const body = { specialization: specType };
+
+      const response = await axios.put(url, body);
+      const caseStudyCardData: CaseStudyCards[] = response.data;
+      console.log(caseStudyCardData);
+      setCaseStudyCards(caseStudyCardData);
+    } catch (err) {
+      console.log(err);
+    }
     setQuestionType(ListOfQuestionTypes.Selected);
   };
 
@@ -126,6 +139,7 @@ const Home = () => {
             <SelectQuestionType selectQuestionTopic={selectQuestionTopic} />
           ) : (
             <CaseStudiesPage
+              caseStudyCards={caseStudyCards}
               backToSelectQuestionTopics={backToSelectQuestionTopics}
               loggedInUser={loggedInUser}
             />

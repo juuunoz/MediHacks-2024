@@ -6,15 +6,15 @@ import { CaseStudyCards } from '../../../models/CaseStudy';
 interface Props {
   backToSelectQuestionTopics: () => void;
   toggleCreateQuiz: () => void;
-  toggleViewQuiz: () => void;
   CaseStudiesCard: CaseStudyCards[];
+  handleCaseStudyCardClick: (caseStudyID: string) => void;
 }
 
 const SelectCaseStudies: FC<Props> = ({
   backToSelectQuestionTopics,
   toggleCreateQuiz,
-  toggleViewQuiz,
-  CaseStudiesCard
+  CaseStudiesCard,
+  handleCaseStudyCardClick
 }) => {
   return (
     <>
@@ -50,24 +50,30 @@ const SelectCaseStudies: FC<Props> = ({
           return (
             <div
               key={key}
-              className='border-teal-200 border w-96 h-72 mx-10 rounded'
+              className='relative border-teal-200 border w-96 h-72 mx-10 rounded overflow-hidden'
             >
               <img
                 src={eachCaseStudyCard.image}
                 alt={'Case Study Image'}
-                className='absolute w-96 h-72 object-cover opacity-40'
+                className='absolute w-96 h-72 object-cover opacity-30'
               />
-              <div className='flex flex-col h-full w-full items-center p-4'>
+              <div className='relative flex flex-col h-full w-full items-center p-2'>
                 <div className='h-4/5 w-full'>
-                  <div className='text-xl pb-2'>{eachCaseStudyCard.title}</div>
-                  <div>{eachCaseStudyCard.shortDescription}</div>
+                  <div className='text-xl border h-20 overflow-auto border-teal-300 p-1 m-1'>
+                    {eachCaseStudyCard.title}
+                  </div>
+                  <div className='h-32 overflow-auto border border-teal-300 p-1 m-1'>
+                    {eachCaseStudyCard.shortDescription}
+                  </div>
                 </div>
                 <div className='h-1/5 w-full flex flex-row justify-between items-center'>
                   <div>likes: {eachCaseStudyCard.likes}</div>
                   <button
                     type='button'
                     className='z-10 bg-button1'
-                    onClick={() => toggleViewQuiz()}
+                    onClick={() =>
+                      handleCaseStudyCardClick(eachCaseStudyCard.caseStudyID)
+                    }
                   >
                     Select
                   </button>

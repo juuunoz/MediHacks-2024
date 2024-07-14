@@ -5,34 +5,35 @@ import { PageEnum } from '../../../util/enums';
 import CreateCaseStudy from './CreateCaseStudy';
 import ViewCaseStudy from './ViewCaseStudy';
 
-import { CaseStudiesCard } from '../../../util/SampleCaseStudies';
-import { SampleQuizQandAs } from '../../../util/SampleQuizQandAs';
-import { SingleCaseStudy } from '../../../util/SingleCaseStudy';
 import {
   CaseStudyCardSubmitPackage,
   CaseStudyQuestionsSubmitPackage,
   CreateCaseStudyRequest,
-  Question
+  Question,
+  CaseStudyCards,
+  QuizQuestionAnswers
 } from '../../../models/CaseStudy';
 import { UserDetails } from '../../../models/User';
 
 interface Props {
+  caseStudyCards: CaseStudyCards[] | null;
   backToSelectQuestionTopics: () => void;
   loggedInUser: UserDetails | null;
 }
 
 const CaseStudiesPage: FC<Props> = ({
+  caseStudyCards,
   backToSelectQuestionTopics,
   loggedInUser
 }) => {
   const [pageToggle, setPageToggle] = useState<PageEnum>(PageEnum.Home);
+  const [caseStudyQuestions, setCaseStudyQuestions] =
+    useState<QuizQuestionAnswers | null>(null);
+  const [selectedCaseStudyCard, setSelectedCaseStudyCard] =
+    useState<CaseStudyCards | null>(null);
 
   const toggleCreateQuiz = () => {
     setPageToggle(PageEnum.CreateQuiz);
-  };
-
-  const toggleViewQuiz = () => {
-    setPageToggle(PageEnum.ViewQuiz);
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -114,11 +115,31 @@ const CaseStudiesPage: FC<Props> = ({
       const response = await axios.post(url, body);
       const createCaseStudyData = response.data;
       console.log(createCaseStudyData);
-
       handleCloseCaseStudy();
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const handleCaseStudyCardClick = async (caseStudyID: string) => {
+    try {
+      const url = '/api/casestudies/getCaseStudyQuestion';
+      const body = { caseStudyID: caseStudyID };
+
+      const response = await axios.put(url, body);
+      const caseStudyQuestionsData: QuizQuestionAnswers = response.data[0];
+      setCaseStudyQuestions(caseStudyQuestionsData);
+      const selectedCaseStudyCard = caseStudyCards!.find(
+        (caseStudyCard) => caseStudyCard.caseStudyID
+      );
+      if (selectedCaseStudyCard !== undefined) {
+        setSelectedCaseStudyCard(selectedCaseStudyCard);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+
+    setPageToggle(PageEnum.ViewQuiz);
   };
 
   const handleCloseCaseStudy = () => {
@@ -129,14 +150,16 @@ const CaseStudiesPage: FC<Props> = ({
     setPageToggle(PageEnum.Home);
   };
 
+  if (caseStudyCards === null) return null;
+
   return (
     <>
       {pageToggle === PageEnum.Home ? (
         <SelectCaseStudies
           backToSelectQuestionTopics={backToSelectQuestionTopics}
           toggleCreateQuiz={toggleCreateQuiz}
-          toggleViewQuiz={toggleViewQuiz}
-          CaseStudiesCard={CaseStudiesCard}
+          CaseStudiesCard={caseStudyCards}
+          handleCaseStudyCardClick={handleCaseStudyCardClick}
         />
       ) : null}
       {pageToggle === PageEnum.CreateQuiz ? (
@@ -147,8 +170,8 @@ const CaseStudiesPage: FC<Props> = ({
       ) : null}
       {pageToggle === PageEnum.ViewQuiz ? (
         <ViewCaseStudy
-          SingleCaseStudy={SingleCaseStudy}
-          QuizQandAs={SampleQuizQandAs}
+          SingleCaseStudy={selectedCaseStudyCard}
+          QuizQandAs={caseStudyQuestions}
           handleCloseCaseStudy={handleCloseCaseStudy}
           handleFinishQuiz={handleFinishQuiz}
         />

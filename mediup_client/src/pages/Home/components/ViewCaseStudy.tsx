@@ -10,8 +10,8 @@ enum CheckAnswerState {
 }
 
 interface Props {
-  SingleCaseStudy: CaseStudyCards;
-  QuizQandAs: QuizQuestionAnswers;
+  SingleCaseStudy: CaseStudyCards | null;
+  QuizQandAs: QuizQuestionAnswers | null;
   handleCloseCaseStudy: () => void;
   handleFinishQuiz: () => void;
 }
@@ -34,6 +34,7 @@ const ViewCaseStudy: FC<Props> = ({
   );
 
   useEffect(() => {
+    if (QuizQandAs === null || QuizQandAs.data === undefined) return;
     const pageArray = [];
     const tempAnswerArray = [];
     for (let i = 0; i < QuizQandAs.data.length; i++) {
@@ -72,7 +73,7 @@ const ViewCaseStudy: FC<Props> = ({
   };
 
   const handleCheckAnswer = () => {
-    if (selectedQuestion === null) {
+    if (selectedQuestion === null || QuizQandAs === null) {
       return;
     }
     setSelectedQuestion(null);
@@ -87,6 +88,8 @@ const ViewCaseStudy: FC<Props> = ({
     tempSelectedAnswerArray[currPageNum - 1] = selectedQuestion;
     setSelectedAnswerArray(tempSelectedAnswerArray);
   };
+
+  if (QuizQandAs === null || SingleCaseStudy === null) return null;
 
   return (
     <>

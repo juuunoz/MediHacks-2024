@@ -3,6 +3,7 @@ import { QuestionTypes } from '../models/Questions';
 export const questionTypes: QuestionTypes[] = [
   {
     questionType: 'Cardiology',
+    spec: 'Doctor',
     shortDescription:
       'Case studies involving heart and blood vessel conditions such as coronary artery disease, heart failure, arrhythmias, and hypertension.',
     image:
@@ -10,6 +11,7 @@ export const questionTypes: QuestionTypes[] = [
   },
   {
     questionType: 'Endocrinology',
+    spec: 'Doctor',
     shortDescription:
       'Studies focusing on disorders related to hormonal imbalances, including diabetes mellitus, thyroid diseases, adrenal disorders, and pituitary gland abnormalities.',
     image:
@@ -17,6 +19,7 @@ export const questionTypes: QuestionTypes[] = [
   },
   {
     questionType: 'Gastroenterology',
+    spec: 'Doctor',
     shortDescription:
       'Cases related to the digestive system, encompassing conditions like inflammatory bowel disease (IBD), irritable bowel syndrome (IBS), liver diseases, and gastrointestinal cancers.',
     image:
@@ -24,6 +27,7 @@ export const questionTypes: QuestionTypes[] = [
   },
   {
     questionType: 'Neurology',
+    spec: 'Dentistry',
     shortDescription:
       "Studies examining diseases and disorders of the nervous system, including stroke, epilepsy, multiple sclerosis, Parkinson's disease, and migraines.",
     image:
@@ -31,6 +35,7 @@ export const questionTypes: QuestionTypes[] = [
   },
   {
     questionType: 'Oncology',
+    spec: 'Dentistry',
     shortDescription:
       'Case studies focusing on different types of cancers, their diagnosis, treatment options, and patient outcomes.',
     image:
@@ -38,6 +43,7 @@ export const questionTypes: QuestionTypes[] = [
   },
   {
     questionType: 'Pediatrics',
+    spec: 'Dentistry',
     shortDescription:
       'Cases related to the health and medical care of infants, children, and adolescents, including congenital disorders, infectious diseases, and developmental issues.',
     image:

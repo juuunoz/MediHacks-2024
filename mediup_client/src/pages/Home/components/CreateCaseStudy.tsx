@@ -112,7 +112,7 @@ const CreateCaseStudy: FC<Props> = ({ handleSubmit, handleCloseCaseStudy }) => {
           <div className='flex justify-end w-4/5'>
             {numOfQuestions.length == 1 ? null : (
               <button
-                className='h-18 text-3xl mt-8 mx-4'
+                className='h-18 text-3xl mt-8 mx-4 bg-button2'
                 type='button'
                 onClick={() => handleDeleteQuestion()}
               >

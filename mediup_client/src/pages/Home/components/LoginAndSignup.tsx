@@ -18,8 +18,8 @@ const LoginAndSignup: FC<Props> = ({
 }) => {
   return (
     <>
-      <div className='absolute h-screen w-screen bg-slate-900/70' />
-      <div className='absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[28rem] h-auto bg-Background border border-black flex flex-col p-6 z-50 bg-gray-700'>
+      <div className='absolute h-screen w-screen bg-slate-900/80' />
+      <div className='absolute left-1/2 top-1/2 text-black transform -translate-x-1/2 -translate-y-1/2 w-[28rem] h-auto bg-Background border border-black flex flex-col p-6 z-50 bg-primary3'>
         {/* Login title MediUp */}
         <div className='mb-4'>
           <img src={mediUp_Logo} className='w-60' alt='logo' />
@@ -35,7 +35,7 @@ const LoginAndSignup: FC<Props> = ({
               <input
                 name='loginEmail'
                 placeholder='Email'
-                className='p-2 mb-4 mt-8 w-full text-white rounded-md text-lg'
+                className='p-2 mb-4 mt-8 w-full rounded-md text-lg bg-slate-300'
               />
             </div>
             <div className='mb-8 text-center'>
@@ -44,18 +44,18 @@ const LoginAndSignup: FC<Props> = ({
                 type='password'
                 name='loginPassword'
                 placeholder='Password'
-                className='p-2 w-full text-white rounded-md text-lg'
+                className='p-2 w-full rounded-md text-lg bg-slate-300'
               />
             </div>
             <div className='flex flex-row justify-center'>
               <button
                 type='button'
-                className='w-36 mr-4 text-xl'
+                className='w-36 mr-4 text-xl bg-button2'
                 onClick={handleSignupToggle}
               >
                 Sign up
               </button>
-              <button type='submit' className='w-36 ml-4 text-xl'>
+              <button type='submit' className='w-36 ml-4 text-xl bg-button1'>
                 Login
               </button>
             </div>
@@ -75,19 +75,19 @@ const LoginAndSignup: FC<Props> = ({
                   type='email'
                   name='Email'
                   placeholder='Email'
-                  className='p-2 mb-4 w-full text-white rounded-md text-lg'
+                  className='p-2 mb-4 w-full rounded-md text-lg bg-slate-300'
                 />
                 <input
                   type='password'
                   name='password1'
                   placeholder='Password'
-                  className='p-2 mb-4 w-full text-white rounded-md text-lg'
+                  className='p-2 mb-4 w-full rounded-md text-lg bg-slate-300'
                 />
                 <input
                   type='password'
                   name='password2'
                   placeholder='Re-enter Password'
-                  className='p-2 w-full text-white rounded-md text-lg'
+                  className='p-2 w-full rounded-md text-lg bg-slate-300'
                 />
               </div>
               <div className='w-full h-full border p-2 mt-2 border-sky-600'>
@@ -97,38 +97,38 @@ const LoginAndSignup: FC<Props> = ({
                 <input
                   placeholder='First Name'
                   name='firstName'
-                  className='p-2 mb-4 w-full text-white rounded-md text-lg'
+                  className='p-2 mb-4 w-full rounded-md text-lg bg-slate-300'
                 />
                 <input
                   placeholder='Last Name'
                   name='lastName'
-                  className='p-2 mb-4 w-full text-white rounded-md text-lg'
+                  className='p-2 mb-4 w-full rounded-md text-lg bg-slate-300'
                 />
                 <input
                   placeholder='Occupation'
                   name='occupation'
-                  className='p-2 mb-4 w-full text-white rounded-md text-lg'
+                  className='p-2 mb-4 w-full rounded-md text-lg bg-slate-300'
                 />
                 <input
                   placeholder='Institution'
                   name='institution'
-                  className='p-2 mb-4 w-full text-white rounded-md text-lg'
+                  className='p-2 mb-4 w-full rounded-md text-lg bg-slate-300'
                 />
                 <input
                   placeholder='Specialization'
                   name='specialization'
-                  className='p-2 mb-4 w-full text-white rounded-md text-lg'
+                  className='p-2 mb-4 w-full rounded-md text-lg bg-slate-300'
                 />
               </div>
               <div className='flex flex-row  justify-center py-4 bg-'>
                 <button
                   type='button'
-                  className='w-36 mr-4 text-xl'
+                  className='w-36 mr-4 text-xl bg-button2'
                   onClick={handleLoginToggle}
                 >
                   Back
                 </button>
-                <button type='submit' className='w-80 ml-4 text-xl'>
+                <button type='submit' className='w-80 ml-4 text-xl bg-button1'>
                   Create Your Account!
                 </button>
               </div>

@@ -11,7 +11,7 @@ const ViewCaseStudyDetails: FC<Props> = ({
   setStartedQuiz
 }) => {
   return (
-    <div className='border border-black h-full w-full flex flex-col items-center p-8 justify-between'>
+    <div className='border-teal-200 border h-full w-full flex flex-col items-center p-8 justify-between'>
       <div>
         <div className='mb-16 text-6xl'>{SingleCaseStudy.title}</div>
         <div className='text-5xl'>{SingleCaseStudy.shortDescription}</div>
@@ -19,7 +19,7 @@ const ViewCaseStudyDetails: FC<Props> = ({
       <button
         onClick={() => setStartedQuiz(true)}
         type='button'
-        className='h-28 py-0 px-12 w-auto'
+        className='h-28 py-0 px-12 w-auto bg-button1'
       >
         Start Case Study!
       </button>

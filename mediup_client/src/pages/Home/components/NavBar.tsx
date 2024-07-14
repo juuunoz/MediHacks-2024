@@ -31,7 +31,7 @@ const NavBar = () => {
   };
 
   return (
-    <div className='w-screen h-32 flex flex-row justify-between items-center'>
+    <div className='w-screen h-32 flex flex-row justify-between items-center bg-primary1'>
       <div></div>
       <Link to='/'>
         <img src={mediUp_Logo} className='w-96' alt='logo' />

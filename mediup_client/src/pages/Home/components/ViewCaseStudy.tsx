@@ -90,11 +90,11 @@ const ViewCaseStudy: FC<Props> = ({
 
   return (
     <>
-      <div className='h-5/6 w-4/5 flex flex-col items-center text-6xl'>
+      <div className='h-5/6 w-4/5 flex flex-col items-center text-6xl mt-24'>
         <div className='absolute left-6 top-36'>
           <button
             onClick={() => handleCloseCaseStudy()}
-            className='w-auto h-auto text-3xl bg-gray-200'
+            className='w-auto h-auto text-3xl bg-button2'
           >
             Back
           </button>

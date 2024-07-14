@@ -7,6 +7,8 @@ import {
 import { AuthService } from '../services/authService';
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
+import AuthUserSchema from '../schema/authUserSchema';
+
 export class AuthController {
   private authService: AuthService;
 
@@ -48,7 +50,17 @@ export class AuthController {
             expiresIn: '7d'
           });
 
-          return res.json({ token });
+          const userDetailResponse: AuthUserResponse | null =
+            await AuthUserSchema.findOne({
+              userEmail: user.userEmail
+            });
+
+          const response = {
+            token: token,
+            userDetails: userDetailResponse
+          };
+
+          return res.json(response);
         });
       } catch (error) {
         return next(error);

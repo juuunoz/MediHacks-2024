@@ -1,4 +1,5 @@
 export interface QuestionTypes {
-  questionType: string,
-  shortDescription: string
+  questionType: string;
+  shortDescription: string;
+  image: string;
 }

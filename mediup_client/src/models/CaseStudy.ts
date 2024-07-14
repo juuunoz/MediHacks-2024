@@ -31,6 +31,7 @@ export interface CaseStudyCardSubmitPackage {
   title: string;
   shortDescription: string;
   specilization: string;
+  creatorID: string;
 }
 
 export interface CaseStudyQuestionsSubmitPackage {

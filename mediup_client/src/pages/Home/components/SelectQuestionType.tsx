@@ -21,7 +21,7 @@ const SelectQuestionType: FC<Props> = ({ selectQuestionTopic }) => {
               <img
                 src={eachQuestionType.image}
                 alt={'Case Study Image'}
-                className='absolute h-60 w-96 object-cover opacity-40'
+                className='absolute h-60 w-96 object-cover opacity-30 border-teal-200 border'
               />
               <div className='flex flex-col items-center'>
                 <div className='text-3xl py-2'>
@@ -32,7 +32,10 @@ const SelectQuestionType: FC<Props> = ({ selectQuestionTopic }) => {
                 </div>
               </div>
               <div className='my-3 mr-3 flex justify-end items-center'>
-                <button className='z-10' onClick={() => selectQuestionTopic()}>
+                <button
+                  className='z-10 bg-button1'
+                  onClick={() => selectQuestionTopic()}
+                >
                   Learn!
                 </button>
               </div>

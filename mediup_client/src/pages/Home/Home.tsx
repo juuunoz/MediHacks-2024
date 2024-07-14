@@ -110,7 +110,7 @@ const Home = () => {
 
   return (
     <>
-      <div className='w-screen h-screen max-h-screen overflow-hidden flex flex-col items-center bg-white text-black'>
+      <div className='w-screen h-screen max-h-screen overflow-hidden flex flex-col items-center text-white'>
         <NavBar />
         {loggedInUser === null ? (
           <LoginAndSignup
@@ -121,7 +121,7 @@ const Home = () => {
             handleLoginToggle={handleLoginToggle}
           />
         ) : null}
-        <div className='w-screen h-5/6 flex flex-col justify-center items-center'>
+        <div className='w-screen h-full flex flex-col justify-start items-center bg-primary3'>
           {questionType === ListOfQuestionTypes.NotSelected ? (
             <SelectQuestionType selectQuestionTopic={selectQuestionTopic} />
           ) : (

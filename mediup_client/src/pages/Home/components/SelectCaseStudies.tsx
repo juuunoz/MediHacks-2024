@@ -22,7 +22,7 @@ const SelectCaseStudies: FC<Props> = ({
         <div className='absolute left-8'>
           <button
             onClick={() => backToSelectQuestionTopics()}
-            className='w-auto h-auto text-3xl bg-gray-200'
+            className='w-auto h-auto text-3xl bg-button2'
           >
             Go Back
           </button>
@@ -30,14 +30,14 @@ const SelectCaseStudies: FC<Props> = ({
         <div className='absolute right-8'>
           <button
             onClick={() => toggleCreateQuiz()}
-            className='w-auto h-auto text-3xl bg-gray-200'
+            className='w-auto h-auto text-3xl bg-button3'
           >
             Create Quiz
           </button>
         </div>
-        <div className='flex w-1/2 bg-gray-200'>
+        <div className='flex w-1/2 bg-primary1 mt-16'>
           <input
-            className='bg-gray-200 w-full pl-2'
+            className='w-full pl-2 bg-primary1'
             placeholder='Search Case Studies'
           ></input>
           <div className='w-24 flex justify-center items-center'>
@@ -50,7 +50,7 @@ const SelectCaseStudies: FC<Props> = ({
           return (
             <div
               key={key}
-              className='border border-black w-96 h-72 mx-10 rounded'
+              className='border-teal-200 border w-96 h-72 mx-10 rounded'
             >
               <img
                 src={eachCaseStudyCard.image}
@@ -66,7 +66,7 @@ const SelectCaseStudies: FC<Props> = ({
                   <div>likes: {eachCaseStudyCard.likes}</div>
                   <button
                     type='button'
-                    className='z-10'
+                    className='z-10 bg-button1'
                     onClick={() => toggleViewQuiz()}
                   >
                     Select

@@ -18,6 +18,8 @@ The site combines a large intuitive UI and gamification to help users get back a
 The site is built with Typescript - React on the front-end and Express on the back-end. MongoDB is used to store data and everything is protected with authentication via JWT.
 Importantly, sensitive information is hashed.
 
+The site is hosted on Render.com using a free tier. Sometimes it takes a while to load... please be patient!
+
 ## Usage
 
 ![Login Page](https://cdn.discordapp.com/attachments/1261858048360714351/1262080777198374942/image.png?ex=66954bd1&is=6693fa51&hm=654146aeb22cb6e08a1baf943eeaec21c08cb5df0629bf3a480207a61680c55d&)

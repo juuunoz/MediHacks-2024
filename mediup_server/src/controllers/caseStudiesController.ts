@@ -9,9 +9,21 @@ export class CaseStudiesController {
     this.caseStudiesService = new CaseStudiesService();
   }
 
-  public getAllCaseStudies = (req: Request, res: Response): void => {
-    const caseStudies = this.caseStudiesService.getAllCaseStudies();
-    res.json(caseStudies);
+  public getAllCaseStudyCards = async (req: Request, res: Response) => {
+    const specilization: string = req.body.specialization.toString();
+
+    const caseStudies = await this.caseStudiesService.getAllCaseStudyCards(
+      specilization
+    );
+    res.status(200).send(JSON.stringify(caseStudies));
+  };
+
+  public getCaseStudyQuestion = async (req: Request, res: Response) => {
+    const caseStudyID: string = req.body.caseStudyID.toString();
+
+    const caseStudyQuestions =
+      await this.caseStudiesService.getCaseStudyQuestion(caseStudyID);
+    res.status(200).send(JSON.stringify(caseStudyQuestions));
   };
 
   public createCaseStudy = async (req: Request, res: Response) => {

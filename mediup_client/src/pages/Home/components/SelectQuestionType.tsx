@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { questionTypes } from '../../../util/QuestionTypes';
 
 interface Props {
-  selectQuestionTopic: () => void;
+  selectQuestionTopic: (selectedSpec: string) => void;
 }
 
 const SelectQuestionType: FC<Props> = ({ selectQuestionTopic }) => {
@@ -34,7 +34,7 @@ const SelectQuestionType: FC<Props> = ({ selectQuestionTopic }) => {
               <div className='my-3 mr-3 flex justify-end items-center'>
                 <button
                   className='z-10 bg-button1'
-                  onClick={() => selectQuestionTopic()}
+                  onClick={() => selectQuestionTopic(eachQuestionType.spec)}
                 >
                   Learn!
                 </button>

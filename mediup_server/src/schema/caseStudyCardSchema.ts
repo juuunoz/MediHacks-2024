@@ -45,9 +45,9 @@ const caseStudyCardSchema: Schema = new Schema({
   }
 });
 
-const caseStudyCard = mongoose.model<caseStudyCard & Document>(
-  'caseStudyCard',
+const CaseStudyCardSchema = mongoose.model(
+  'CaseStudyCardSchema',
   caseStudyCardSchema
 );
 
-export default caseStudyCard;
+export default CaseStudyCardSchema;

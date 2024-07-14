@@ -1,4 +1,5 @@
 import { FC, useState } from 'react';
+import axios from 'axios';
 import SelectCaseStudies from './SelectCaseStudies';
 import { PageEnum } from '../../../util/enums';
 import CreateCaseStudy from './CreateCaseStudy';
@@ -10,6 +11,7 @@ import { SingleCaseStudy } from '../../../util/SingleCaseStudy';
 import {
   CaseStudyCardSubmitPackage,
   CaseStudyQuestionsSubmitPackage,
+  CreateCaseStudyRequest,
   Question
 } from '../../../models/CaseStudy';
 import { UserDetails } from '../../../models/User';
@@ -103,8 +105,20 @@ const CaseStudiesPage: FC<Props> = ({
       questionNumber++;
     }
 
-    console.log(caseStudyCard, caseStudyQuestions);
-    // todo: submit to backend.
+    try {
+      const url = '/api/casestudies/create';
+      const body: CreateCaseStudyRequest = {
+        caseStudy: caseStudyCard,
+        questions: caseStudyQuestions
+      };
+      const response = await axios.post(url, body);
+      const createCaseStudyData = response.data;
+      console.log(createCaseStudyData);
+
+      handleCloseCaseStudy();
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleCloseCaseStudy = () => {

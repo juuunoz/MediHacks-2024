@@ -12,12 +12,17 @@ import {
   CaseStudyQuestionsSubmitPackage,
   Question
 } from '../../../models/CaseStudy';
+import { UserDetails } from '../../../models/User';
 
 interface Props {
   backToSelectQuestionTopics: () => void;
+  loggedInUser: UserDetails | null;
 }
 
-const CaseStudiesPage: FC<Props> = ({ backToSelectQuestionTopics }) => {
+const CaseStudiesPage: FC<Props> = ({
+  backToSelectQuestionTopics,
+  loggedInUser
+}) => {
   const [pageToggle, setPageToggle] = useState<PageEnum>(PageEnum.Home);
 
   const toggleCreateQuiz = () => {
@@ -38,7 +43,8 @@ const CaseStudiesPage: FC<Props> = ({ backToSelectQuestionTopics }) => {
     const caseStudyCard: CaseStudyCardSubmitPackage = {
       title: caseStudyTitle,
       shortDescription: caseStudyDescription,
-      specilization: specilization
+      specilization: specilization,
+      creatorID: loggedInUser!.userID
     };
 
     const caseStudyQuestions: CaseStudyQuestionsSubmitPackage[] = [];

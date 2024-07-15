@@ -24,3 +24,6 @@ dist-ssr
 *.sw?
 .env
 sample
+
+# the script for presentation lol
+presentationScript.txt

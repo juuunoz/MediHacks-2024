@@ -29,7 +29,7 @@ Importantly, sensitive information is hashed.
 
 Front end
 * Typescript
-* React
+* [!React](https://cdn.discordapp.com/attachments/1261510497451376773/1262158701545132092/image.png?ex=66959464&is=669442e4&hm=ca4c5aab0f072d9c85df078ea233bfaa56e341844792ec4ecb886cbfb4dbf9ec&)
 
 Back end
 * Express
